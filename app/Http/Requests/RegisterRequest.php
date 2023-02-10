@@ -27,11 +27,11 @@ class RegisterRequest extends FormRequest
             'name' => 'required|string|min:3|max:100',
             'email' =>'required|email|unique:clients,email',
             'date_of_birth' => 'required|date',
-            'blood_type' => 'required|int|exists:blood_types,id',
+            'blood_type' => 'required|integer|exists:blood_types,id',
             'phone' => ['regex:/^01[0125][0-9]{8}$/',],
             'password' => 'required|min:6',
             'last_donation_date' => 'required|date',
-            'city_id' => 'required|int|exists:cities,id',
+            'city_id' => 'required|integer|exists:cities,id',
             'device_name' => 'required|string'
         ];
     }

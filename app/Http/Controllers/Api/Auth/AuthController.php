@@ -48,4 +48,15 @@ class AuthController extends Controller
     {
         return explode(' ',explode('|',$token)[0])[1];
     }
+    public function forgetPassword(Request $request)
+    {
+        try{
+
+        }catch (\Exception $e){}
+    }
+
+    public function resetPassword()
+    {
+
+    }
 }

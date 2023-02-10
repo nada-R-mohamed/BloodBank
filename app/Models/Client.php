@@ -27,6 +27,7 @@ class Client extends Authenticatable
         'device_name',
     ];
 
+
     public function donationRequests()
     {
         return $this->hasMany('App\Models\DonationRequest');
