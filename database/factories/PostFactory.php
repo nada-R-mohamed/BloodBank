@@ -19,10 +19,10 @@ class PostFactory extends Factory
     {
         return [
             'title' =>$this->faker->word,
-            'image' => $this->faker->imageUrl(200,200``),
+            'image' => $this->faker->imageUrl(200,200),
             'content'=> $this->faker->paragraph,
             'category_id' => Category::inRandomOrder()->first()->id,
-            'created_at' => now(),
+            'created_at' => now()
 
 
         ];
