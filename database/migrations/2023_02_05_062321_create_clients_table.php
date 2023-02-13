@@ -14,7 +14,7 @@ class CreateClientsTable extends Migration {
 			$table->string('password');
 			$table->string('email')->unique();
 			$table->date('date_of_birth');
-			$table->integer('blood_type');
+			$table->integer('blood_type_id');
 			$table->date('last_donation_date');
 			$table->integer('city_id');
 			$table->integer('pin_code');

@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\CityController;
 use App\Http\Controller\GovernorController;
 use App\Http\Controller\BloodTypeController;
 use App\Http\Controllers\Api\ProfileController;
+use App\Http\Controllers\Api\Auth\ForgetPasswordController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,13 +28,13 @@ Route::group(['prefix'=> 'clients'],function (){
 
     Route::middleware('auth')->group(function () {
         Route::post('logout-current-token',[AuthController::class,'logoutCurrentToken']);
-        Route::post('logout-specific-token',[AuthController::class,'logoutSpecificToken']);
         Route::post('logout-all-tokens',[AuthController::class,'logoutAllTokens']);
         Route::get('contuct-us',[SettingController::class,'contactUs']);
         Route::get('notification-settings',[SettingController::class,'getNotificationSetting']);
         Route::post('set-notification-settings',[SettingController::class,'setNotificationSetting']);
         Route::post('contuct-us-request',[SettingController::class,'contactUsRequest']);
-        Route::get('get-profile',[ProfileController::class,'getProfile']);
+        Route::get('profile',[ProfileController::class,'getProfile']);
+        Route::post('update-profile',[ProfileController::class,'updateProfile']);
     });
     Route::get('categories',[CategoryController::class,'allCategories']);
     Route::get('cities',[CityController::class,'allCities']);
@@ -41,5 +42,7 @@ Route::group(['prefix'=> 'clients'],function (){
     Route::get('blood-types',[BloodTypeController::class,'index']);
     Route::post('register',[RegisterController::class,'register']);
     Route::post('login',[AuthController::class,'login']);
+//    Route::post('forget-password',[AuthController::class,'forget']);
+
 
 });

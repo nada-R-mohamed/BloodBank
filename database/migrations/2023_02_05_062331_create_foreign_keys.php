@@ -68,6 +68,11 @@ class CreateForeignKeys extends Migration {
 						->onDelete('cascade')
 						->onUpdate('cascade');
 		});
+        Schema::table('clients', function(Blueprint $table) {
+            $table->foreign('blood_type_id')->references('id')->on('blood_types')
+                ->onDelete('setNull')
+                ->onUpdate('setNull');
+        });
 		Schema::table('client_governorate', function(Blueprint $table) {
 			$table->foreign('client_id')->references('id')->on('clients')
 						->onDelete('cascade')
@@ -123,6 +128,9 @@ class CreateForeignKeys extends Migration {
 		Schema::table('blood_type_client', function(Blueprint $table) {
 			$table->dropForeign('blood_type_client_blood_type_id_foreign');
 		});
+        Schema::table('blood_type_client', function(Blueprint $table) {
+            $table->dropForeign('blood_type_client_blood_type_id_foreign');
+        });
 		Schema::table('client_governorate', function(Blueprint $table) {
 			$table->dropForeign('client_governorate_client_id_foreign');
 		});

@@ -32,9 +32,8 @@ class SettingController extends Controller
                 'client_id'=> Auth::guard('sanctum')->user()->id,
             ]);
             return $this->success('success');
-        }catch (\Exception ){
-
-            return $this->error(['inputes'=>'unvalid'],"validation error",422);
+        }catch (\Exception $e){
+            return $this->error([$e->getMessage()],statusCode: 422);
         }
 
     }
@@ -42,7 +41,7 @@ class SettingController extends Controller
     {
         $text = Setting::select('notification_setting_text')->get();
         $blood_types = Auth::guard('sanctum')->user()->bloodTypes;
-        $governorates = Auth::guard('sanctum')->user()->governorates;
+        $governorates = Auth::guard('sanctum')->user()->governorates()->pluck('id')->toArray();
         return $this->data(compact('text','blood_types','governorates'),"notification setting text");
     }
 
@@ -58,8 +57,8 @@ class SettingController extends Controller
             $client->governorates()->sync([$request->governorate_id]) ;
             return $this->success('Notification setting set successfully');
 
-        }catch (\Exception){
-            return $this->error(['not found'=>'something is wrong'],statusCode: 400);
+        }catch (\Exception $e){
+            return $this->error([$e->getMessage()],statusCode: 422);
         }
 
     }

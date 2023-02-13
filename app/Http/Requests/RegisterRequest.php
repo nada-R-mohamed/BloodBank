@@ -34,5 +34,6 @@ class RegisterRequest extends FormRequest
             'city_id' => 'required|integer|exists:cities,id',
             'device_name' => 'required|string'
         ];
+
     }
 }

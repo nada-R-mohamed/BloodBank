@@ -24,7 +24,7 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'phone' => ['required','regex:/^01[0125][0-9]{8}$/','exists:clients,phone'],
+            'phone' => ['required','regex:/^01[0125][0-9]{8}$/','exists:clients'],
             'password' => 'required','string','min:6',
             'device_name' => 'required','string'
         ];

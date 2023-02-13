@@ -16,6 +16,7 @@ class AuthController extends Controller
 
     public function login(LoginRequest $request)
     {
+
         $client = Client::where('phone',$request->phone)->first();
         if(! $client || !  Hash::check($request->password,$client->password)){
             return $this->error([
@@ -31,12 +32,6 @@ class AuthController extends Controller
         $request->user('sanctum')->currentAccessToken()->delete();
         return $this->success('Your Current Acceess Token has been destroyed successfully');
     }
-    public function logoutSpecificToken(Request $request)
-    {
-        $request->user('sanctum')->tokens()->where('id',$this->getTokenId($request->header('other-device-token')))->delete();
-        return $this->success('This Acceess Token has been destroyed successfully');
-    }
-
 
     public function logoutAllTokens(Request $request)
     {
@@ -44,19 +39,24 @@ class AuthController extends Controller
         return $this->success('All Of Your Acceess Token has been destroyed successfully');
     }
 
-    private function getTokenId(string $token) :int
+    public function resetPassword(Request $request)
     {
-        return explode(' ',explode('|',$token)[0])[1];
+        // validate phone
+        // get client by phone
+        // create pin_code rand(1000,9999)
+        // update client with pin_code
+        // send it with email
+        // return message
     }
-    public function forgetPassword(Request $request)
+
+    public function newPassword(Request $request)
     {
-        try{
-
-        }catch (\Exception $e){}
+        // validate [phone - pin_code - password confirmed]
+        // get client by phone
+        // check pin_code
+        // update new password
+        // update pin_code to null
+        // return success
     }
 
-    public function resetPassword()
-    {
-
-    }
 }

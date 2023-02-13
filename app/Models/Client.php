@@ -22,7 +22,7 @@ class Client extends Authenticatable
         'date_of_birth',
         'last_donation_date',
         'city_id',
-        'blood_type',
+        'blood_type_id',
         'pin_code',
         'device_name',
     ];

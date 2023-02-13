@@ -14,11 +14,16 @@ class RegisterController extends Controller
     public function register(RegisterRequest $request)
     {
 
-        $data = $request->except('password');
-        $data['password'] = Hash::make($request->password);
-        $client = Client::create($data);
-        $client->token = "Bearer " .$client->createToken($request->device_name)->plainTextToken;
-        return $this->data(compact('client'),'registered',201);
+        try{
+            $data = $request->except('password');
+            $data['password'] = Hash::make($request->password);
+            $client = Client::create($data);
+            $client->token = "Bearer " .$client->createToken($request->device_name)->plainTextToken;
+            return $this->data(compact('client'),'registered',201);
+        }catch (\Exception $e){
+
+            return $this->error([$e->getMessage()],statusCode: 422);
+        }
 
     }
 }
