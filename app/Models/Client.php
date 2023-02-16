@@ -14,8 +14,8 @@ class Client extends Authenticatable
 
     protected $table = 'clients';
     public $timestamps = true;
-    protected $fillable =
-        ['name',
+    protected $fillable = [
+        'name',
         'phone',
         'password',
         'email',

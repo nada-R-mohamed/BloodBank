@@ -21,7 +21,7 @@ class CityController extends Controller
     public function allCities(): JsonResponse
     {
         $cities = City::all();
-        return $this->data(compact('cities'), 'all cities');
+        return $this->responseData(compact('cities'), 'all cities');
     }
 
 }

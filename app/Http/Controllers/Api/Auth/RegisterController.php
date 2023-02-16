@@ -6,12 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
 use App\Models\Client;
 use App\Traits\ApiResponses;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
     use ApiResponses;
-    public function register(RegisterRequest $request)
+    public function register(RegisterRequest $request) : JsonResponse
     {
 
         try{
@@ -19,10 +20,10 @@ class RegisterController extends Controller
             $data['password'] = Hash::make($request->password);
             $client = Client::create($data);
             $client->token = "Bearer " .$client->createToken($request->device_name)->plainTextToken;
-            return $this->data(compact('client'),'registered',201);
+            return $this->responseData(compact('client'),'registered',201);
         }catch (\Exception $e){
 
-            return $this->error([$e->getMessage()],statusCode: 422);
+            return $this->responseError([$e->getMessage()],statusCode: 422);
         }
 
     }

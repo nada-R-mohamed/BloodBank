@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class DonationRequest extends Model
@@ -10,7 +11,19 @@ class DonationRequest extends Model
     use HasFactory;
     protected $table = 'donation_requests';
     public $timestamps = true;
-    protected $fillable = array('patient_name', 'patient_phone', 'patient_age', 'hospital_name', 'hospital_address', 'city_id', 'blood_type_id', 'bags_num', 'details', 'latitude', 'longitude', 'client_id');
+    protected $fillable = array(
+        'patient_name',
+        'patient_phone',
+        'patient_age',
+        'hospital_name',
+        'hospital_address',
+        'city_id',
+        'blood_type_id',
+        'bags_num',
+        'details',
+        'latitude',
+        'longitude',
+        'client_id');
 
     public function client()
     {

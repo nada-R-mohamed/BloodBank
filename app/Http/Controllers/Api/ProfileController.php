@@ -13,11 +13,11 @@ use Illuminate\Http\Request;
 class ProfileController extends Controller
 {
     use ApiResponses;
-    public function getProfile()
+    public function getProfile() : jsonResponse
     {
         $clientProfile = Auth::guard('sanctum')->user();
 
-        return $this->data(compact('clientProfile'));
+        return $this->responseData(compact('clientProfile'));
     }
     public function updateProfile(Request $request)
     {
@@ -48,7 +48,7 @@ class ProfileController extends Controller
             'city_id' => $request->city_id,
 
         ]);
-        return $this->success("updated successfully");
+        return $this->responseSuccess("updated successfully");
     }
 
 }

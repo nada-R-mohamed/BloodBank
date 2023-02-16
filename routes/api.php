@@ -1,15 +1,15 @@
 <?php
 
 use App\Http\Controllers\Api\Auth\AuthController;
-use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\SettingController;
 use App\Http\Controllers\Api\CityController;
-use App\Http\Controller\GovernorController;
-use App\Http\Controller\BloodTypeController;
+use App\Http\Controllers\Api\GovernorateController;
+use App\Http\Controllers\Api\PostController;
+use App\Http\Controllers\Api\BloodTypeController;
+use App\Http\Controllers\Api\DonationController;
 use App\Http\Controllers\Api\ProfileController;
-use App\Http\Controllers\Api\Auth\ForgetPasswordController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -35,14 +35,22 @@ Route::group(['prefix'=> 'clients'],function (){
         Route::post('contuct-us-request',[SettingController::class,'contactUsRequest']);
         Route::get('profile',[ProfileController::class,'getProfile']);
         Route::post('update-profile',[ProfileController::class,'updateProfile']);
+        Route::get('all-posts',[PostController::class,'allPosts']);
+        Route::get('post',[PostController::class,'post']);
+        Route::get('favorites',[PostController::class,'listFavoritePosts']);
+        Route::post('favorites',[PostController::class,'toggleFavoritePosts']);
+        Route::post('create-donation',[DonationController::class,'createDonation']);
+        Route::get('all-donations',[DonationController::class,'allDonationRequests']);
+        Route::get('donation',[DonationController::class,'getDonationRequest']);
     });
     Route::get('categories',[CategoryController::class,'allCategories']);
     Route::get('cities',[CityController::class,'allCities']);
     Route::get('governorates',[GovernorateController::class,'AllGovernorates']);
-    Route::get('blood-types',[BloodTypeController::class,'index']);
+    Route::get('blood-types',[BloodTypeController::class,'allBloodTypes']);
     Route::post('register',[RegisterController::class,'register']);
     Route::post('login',[AuthController::class,'login']);
-//    Route::post('forget-password',[AuthController::class,'forget']);
+    Route::post('reset-password',[AuthController::class,'resetPassword']);
+    Route::post('new-password',[AuthController::class,'newPassword']);
 
 
 });

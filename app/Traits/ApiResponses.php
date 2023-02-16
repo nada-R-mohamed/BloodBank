@@ -2,7 +2,7 @@
 namespace App\Traits;
 
 trait ApiResponses {
-    public function success(string $message ,int $statusCode = 200)
+    public function responseSuccess(string $message ,int $statusCode = 200)
     {
         return response()->json([
             "success"=>true,
@@ -12,7 +12,7 @@ trait ApiResponses {
         ],$statusCode);
     }
 
-    public function error(array $errors , string $message = "" ,int $statusCode = 422)
+    public function responseError(array $errors , string $message = "" ,int $statusCode = 422)
     {
         return response()->json([
             "success"=>false,
@@ -22,7 +22,7 @@ trait ApiResponses {
         ],$statusCode);
     }
 
-    public function data(array $data , string $message = "" ,int $statusCode = 200)
+    public function responseData(array $data , string $message = "" ,int $statusCode = 200)
     {
         return response()->json([
             "success"=>true,

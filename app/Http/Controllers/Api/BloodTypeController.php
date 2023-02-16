@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\BloodType;
 use App\Traits\ApiResponses;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class BloodTypeController extends Controller
@@ -13,12 +14,12 @@ class BloodTypeController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
-    public function index()
+    public function allBloodTypes() : JsonResponse
     {
         $bloodTypes = BloodType::select('id','name')->get();
-        return $this->data(compact('bloodTypes'),'All blood types');
+        return $this->responseData(compact('bloodTypes'),'All blood types');
     }
 
 }

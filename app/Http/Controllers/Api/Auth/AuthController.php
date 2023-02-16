@@ -6,57 +6,93 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use App\Models\Client;
 use App\Traits\ApiResponses;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
     use ApiResponses;
 
-    public function login(LoginRequest $request)
+    public function login(LoginRequest $request) : JsonResponse
     {
 
         $client = Client::where('phone',$request->phone)->first();
         if(! $client || !  Hash::check($request->password,$client->password)){
-            return $this->error([
+            return $this->responseError([
                 'email'=>'The provided credentials are incorrect.'
             ],statusCode:401);
         }
         $client->token = "Bearer " .$client->createToken($request->device_name)->plainTextToken;
-        return $this->data(compact('client'));
+        return $this->responseData(compact('client'));
     }
 
-    public function logoutCurrentToken(Request $request)
+    public function logoutCurrentToken(Request $request) : JsonResponse
     {
         $request->user('sanctum')->currentAccessToken()->delete();
-        return $this->success('Your Current Acceess Token has been destroyed successfully');
+        return $this->responseSuccess('Your Current Acceess Token has been destroyed successfully');
     }
 
-    public function logoutAllTokens(Request $request)
+    public function logoutAllTokens(Request $request) : JsonResponse
     {
         $request->user('sanctum')->tokens()->delete();
-        return $this->success('All Of Your Acceess Token has been destroyed successfully');
+        return $this->responseSuccess('All Of Your Acceess Token has been destroyed successfully');
     }
 
-    public function resetPassword(Request $request)
+    public function resetPassword(Request $request) :JsonResponse
     {
         // validate phone
+        $validator = Validator::make([$request->all()],[
+            'phone' =>'required|string|exists:clients,phone'
+        ]);
+        if ($validator->fails()) {
+            return $this->responseError($validator->errors());
+        }
         // get client by phone
+        $client = Client::where('phone',$request->phone)->first();
+        if(! $client){
+            return $this->responseError(['phone' => 'The provided phone is incorrect.'],statusCode:401);
+        }
         // create pin_code rand(1000,9999)
+        $pin_code = rand(1000,9999);
         // update client with pin_code
+        $client->pin_code = $pin_code;
+        $client->save();
+        return $this->responseData(compact('pin_code'));
         // send it with email
         // return message
     }
 
-    public function newPassword(Request $request)
+    public function newPassword(Request $request) : JsonResponse
     {
         // validate [phone - pin_code - password confirmed]
+        $validator = Validator::make($request->all(),[
+            'phone' =>'required|string|exists:clients,phone',
+            'pin_code' =>'required|string|exists:clients,pin_code',
+            'password' =>'required|string|confirmed|min:6',
+        ]);
+        if ($validator->fails()) {
+            return $this->responseError([$validator->errors()]);
+        }
+
         // get client by phone
+        $client = Client::where('phone',$request->phone)->first();
+        if(! $client){
+            return $this->responseError(['phone' => 'The provided phone is incorrect.'],statusCode:401);
+        }
         // check pin_code
+        if($client->pin_code != $request->pin_code){
+            return $this->responseError(['pin_code' => 'The provided pin code is incorrect.'],statusCode:401);
+        }
         // update new password
-        // update pin_code to null
+        $client->update([
+            'password' => Hash::make($request->password),
+            'pin_code' => null,
+        ]);
         // return success
+        return $this->responseSuccess('password updated successfully');
     }
 
 }
