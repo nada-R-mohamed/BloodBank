@@ -56,5 +56,6 @@ class PostController extends Controller
         $client = Auth::guard('sanctum')->user();
         $favoritePosts = $client->posts()->toggle($request->post_id);
         return $this->responseData(compact('favoritePosts'),"toggle favorite posts");
+
     }
 }

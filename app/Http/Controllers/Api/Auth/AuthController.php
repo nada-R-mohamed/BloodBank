@@ -9,6 +9,8 @@ use App\Traits\ApiResponses;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ResetPassword;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -44,11 +46,11 @@ class AuthController extends Controller
     public function resetPassword(Request $request) :JsonResponse
     {
         // validate phone
-        $validator = Validator::make([$request->all()],[
-            'phone' =>'required|string|exists:clients,phone'
+        $validator = Validator::make($request->all(),[
+            'phone' =>'required|string',['exists:clients,phone'],
         ]);
         if ($validator->fails()) {
-            return $this->responseError($validator->errors());
+            return $this->responseError([$validator->errors()]);
         }
         // get client by phone
         $client = Client::where('phone',$request->phone)->first();
@@ -60,9 +62,10 @@ class AuthController extends Controller
         // update client with pin_code
         $client->pin_code = $pin_code;
         $client->save();
-        return $this->responseData(compact('pin_code'));
         // send it with email
+        Mail::to($client->email)->send(new ResetPassword($pin_code));
         // return message
+        return $this->responseSuccess("The Pin Code has ben send to your email");
     }
 
     public function newPassword(Request $request) : JsonResponse
