@@ -42,6 +42,7 @@ Route::group(['prefix'=> 'clients'],function (){
         Route::post('create-donation',[DonationController::class,'createDonation']);
         Route::get('all-donations',[DonationController::class,'allDonationRequests']);
         Route::get('donation',[DonationController::class,'getDonationRequest']);
+        Route::get('register-token',[AuthController::class,'registerToken']);
     });
     Route::get('categories',[CategoryController::class,'allCategories']);
     Route::get('cities',[CityController::class,'allCities']);

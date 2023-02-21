@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class DonationRequest extends Model
 {
@@ -40,7 +41,10 @@ class DonationRequest extends Model
         return $this->hasOne('App\Models\Notification');
     }
 
-    public function bloodType()
+    /**
+     * @return BelongsTo
+     */
+    public function bloodType() : BelongsTo
     {
         return $this->belongsTo('App\Models\BloodType');
     }

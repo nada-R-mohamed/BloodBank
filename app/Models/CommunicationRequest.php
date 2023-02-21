@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CommunicationRequest extends Model 
+class CommunicationRequest extends Model
 {
+    use HasFactory;
 
     protected $table = 'communication_requests';
     public $timestamps = true;

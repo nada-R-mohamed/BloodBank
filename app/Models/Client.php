@@ -58,5 +58,9 @@ class Client extends Authenticatable
         return $this->belongsToMany('App\Models\DonationRequest');
     }
 
+    public function notificationTokens()
+    {
+        return $this->hasMany('App\Models\Token');
+    }
 
 }

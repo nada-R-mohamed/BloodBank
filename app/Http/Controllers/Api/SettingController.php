@@ -42,7 +42,7 @@ class SettingController extends Controller
     {
         $text = Setting::select('notification_setting_text')->get();
         $blood_types = Auth::guard('sanctum')->user()->bloodTypes;
-        $governorates = Auth::guard('sanctum')->user()->governorates()->pluck('id')->toArray();
+        $governorates = Auth::guard('sanctum')->user()->governorates()->pluck('governorates.id')->toArray();
         return $this->responseData(compact('text','blood_types','governorates'),"notification setting text");
     }
 

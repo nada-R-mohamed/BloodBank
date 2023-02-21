@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use App\Models\Client;
+use App\Models\Token;
 use App\Traits\ApiResponses;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -57,7 +58,7 @@ class AuthController extends Controller
         if(! $client){
             return $this->responseError(['phone' => 'The provided phone is incorrect.'],statusCode:401);
         }
-        // create pin_code rand(1000,9999)
+        // create pin_code
         $pin_code = rand(1000,9999);
         // update client with pin_code
         $client->pin_code = $pin_code;
@@ -96,6 +97,32 @@ class AuthController extends Controller
         ]);
         // return success
         return $this->responseSuccess('password updated successfully');
+    }
+
+    public function registerToken(Request $request) : JsonResponse
+    {
+        $validator = Validator::make($request->all(),[
+            'token' => 'required|string',
+            'platform' => 'required|in:android,ios',
+        ]);
+        if ($validator->fails()) {
+            return $this->responseError([$validator->errors()]);
+        }
+       Token::where('token',$request->token)->delete();
+        $request->user('sanctum')->notificationTokens()->create($request->all());
+        return $this->responseSuccess("registration token created successfully");
+    }
+
+    public function removeToken(Request $request) : JsonResponse
+    {
+        $validator = Validator::make($request->all(),[
+            'token' => 'required|string',
+        ]);
+        if ($validator->fails()) {
+            return $this->responseError([$validator->errors()]);
+        }
+        Token::where('token',$request->token)->delete();
+        return $this->responseSuccess("registration token deleted successfully");
     }
 
 }
