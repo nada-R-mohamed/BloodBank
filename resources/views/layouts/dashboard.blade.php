@@ -191,13 +191,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </div>        <!-- /.content-header -->
 
         <!-- Main content -->
-        <div class="content">
-            <div class="container-fluid">
 
             @yield('content')
 
-            </div><!-- /.container-fluid -->
-        </div>
+
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->

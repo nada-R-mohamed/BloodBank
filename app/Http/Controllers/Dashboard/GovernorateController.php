@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\Governorate;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class GovernorateController extends Controller
 {
@@ -43,7 +42,7 @@ class GovernorateController extends Controller
         // store in governorate model
         $governorate = Governorate::create($request->all());
         // return redirect to index page with success message
-        return redirect()->route('dashboard.governorates.index')
+        return redirect()->route('governorates.index')
             ->with('success','Governorate created successfully.');
     }
 
@@ -59,10 +58,11 @@ class GovernorateController extends Controller
         try{
             $governorate = Governorate::findOrFail($id);
         }catch (\Exception $e){
-            return redirect()->route('dashboard.governorates.index')->with('error','Governorate not found');
+            return redirect()->route('governorates.index')
+                ->with('error','Governorate not found');
         }
         //return view with governorate
-        return view('dashboard.governorates.show',compact('governorate'));
+        return view('governorates.show',compact('governorate'));
     }
 
     /**
@@ -77,7 +77,7 @@ class GovernorateController extends Controller
         try{
             $governorate = Governorate::findOrFail($id);
         }catch (\Exception $e){
-            return redirect()->route('dashboard.governorates.index')->with('error','Governorate not found');
+            return redirect()->route('governorates.index')->with('error','Governorate not found');
         }
         //return view with the edit form by id parameter
         return view('dashboard.governorates.edit',compact('governorate'));
@@ -99,7 +99,7 @@ class GovernorateController extends Controller
         //update governorate model
         $governorate->update($request->all());
         //return redirect to index page with success message
-        return redirect()->route('dashboard.governorates.index')
+        return redirect()->route('governorates.index')
             ->with('success','Governorate updated successfully.');
         // return redirect to index page with success message
     }
@@ -110,14 +110,11 @@ class GovernorateController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Governorate $governorate)
     {
-        // find the governorate by id
-        $governorate = Governorate::findOrFail($id);
-        //delete the model
         $governorate->delete();
         //return redirect to index page with success message
-        return redirect()->route('dashboard.governorates.index')
+        return redirect()->route('governorates.index')
             ->with('success','Governorate deleted successfully.');
     }
 }

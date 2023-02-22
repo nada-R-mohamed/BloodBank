@@ -21,12 +21,9 @@ Route::get('/', function () {
 
 Route::group([
     'prefix' => 'dashboard',
-//    'as' => 'dashboard.'
 ],function(){
-    Route::get('/',[DashboardController::class,'index'])->name('index');
+    Route::get('/',[DashboardController::class,'index'])->name('dashboard.index');
     Route::resource('governorates',GovernorateController::class);
-//    Route::get('governorates/create',[GovernorateController::class,'create'])->name('governorates.create');
-//    Route::post('governorates/store',[GovernorateController::class,'store'])->name('governorates.store');
 
 });
 

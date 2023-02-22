@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Governorate extends Model
 {
     use HasFactory;
-    protected $table = 'governorates';
+//    protected $table = 'governorates';
     protected $fillable = ['name'];
     protected $hidden = ['pivot'];
 
@@ -26,7 +26,7 @@ class Governorate extends Model
     public static function rules($id=0)
     {
         return [
-            'name' => "required|string|min:3|max:255|unique:governorate,name,$id",
+            'name' => "required|string|min:3|max:255|unique:governorates,name,$id",
         ];
     }
 }

@@ -6,6 +6,7 @@ namespace Database\Seeders;
 use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,9 +17,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Post::factory(14)->create();
+
 
         Category::factory(8)->create();
+        Post::factory(14)->create();
         // \App\Models\User::factory(10)->create();
 
          \App\Models\User::factory()->create([
