@@ -4,15 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class DonationRequest extends Model
 {
-
     use HasFactory;
-    protected $table = 'donation_requests';
-    public $timestamps = true;
-    protected $fillable = array(
+    protected $fillable = [
         'patient_name',
         'patient_phone',
         'patient_age',
@@ -24,7 +20,7 @@ class DonationRequest extends Model
         'details',
         'latitude',
         'longitude',
-        'client_id');
+        'client_id'];
 
     public function client()
     {
@@ -44,9 +40,8 @@ class DonationRequest extends Model
     /**
      * @return BelongsTo
      */
-    public function bloodType() : BelongsTo
+    public function bloodType()
     {
         return $this->belongsTo('App\Models\BloodType');
     }
-
 }

@@ -9,8 +9,7 @@ class Governorate extends Model
 {
     use HasFactory;
     protected $table = 'governorates';
-    public $timestamps = true;
-    protected $fillable = array('name');
+    protected $fillable = ['name'];
     protected $hidden = ['pivot'];
 
 
@@ -24,4 +23,10 @@ class Governorate extends Model
         return $this->belongsToMany('App\Models\Client');
     }
 
+    public static function rules($id=0)
+    {
+        return [
+            'name' => "required|string|min:3|max:255|unique:governorate,name,$id",
+        ];
+    }
 }

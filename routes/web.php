@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\GovernorateController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,16 +15,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-Route::get('/',function () {
+Route::get('/', function () {
     return view('welcome');
 });
 
-
 Route::group([
     'prefix' => 'dashboard',
-    'as' => 'dashboard.'
+//    'as' => 'dashboard.'
 ],function(){
     Route::get('/',[DashboardController::class,'index'])->name('index');
+    Route::resource('governorates',GovernorateController::class);
+//    Route::get('governorates/create',[GovernorateController::class,'create'])->name('governorates.create');
+//    Route::post('governorates/store',[GovernorateController::class,'store'])->name('governorates.store');
 
 });
+
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

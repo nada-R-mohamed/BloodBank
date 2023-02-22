@@ -2,14 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Notification extends Model 
+class Notification extends Model
 {
-
-    protected $table = 'notifications';
-    public $timestamps = true;
-    protected $fillable = array('title', 'content', 'donation_request_id');
+    use HasFactory;
+    protected $fillable = ['title', 'content', 'donation_request_id'];
 
     public function donationRequest()
     {
@@ -20,5 +19,4 @@ class Notification extends Model
     {
         return $this->belongsToMany('App\Models\Client');
     }
-
 }

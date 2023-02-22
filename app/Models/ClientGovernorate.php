@@ -8,9 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class ClientGovernorate extends Model
 {
     use HasFactory;
-
-    protected $table = 'client_governorate';
-    public $timestamps = true;
-    protected $fillable = array('client_id', 'governorate_id');
-
+    protected $fillable = ['client_id', 'governorate_id'];
 }

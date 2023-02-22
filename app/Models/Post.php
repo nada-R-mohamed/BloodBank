@@ -8,10 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use HasFactory;
-
-    protected $table = 'posts';
-    public $timestamps = true;
-    protected $fillable = array('title', 'image', 'content', 'category_id');
+    protected $fillable = ['title', 'image', 'content', 'category_id'];
     protected $hidden = ['created_at', 'updated_at','pivot'];
 
     public function category()
@@ -36,5 +33,4 @@ class Post extends Model
             $query->where('category_id', $request->category_id);
         }
     }
-
 }

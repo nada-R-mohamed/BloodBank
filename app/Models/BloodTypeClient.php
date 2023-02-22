@@ -8,8 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class BloodTypeClient extends Model
 {
     use HasFactory;
-    protected $table = 'blood_type_client';
-    public $timestamps = true;
-    protected $fillable = array('client_id', 'blood_type_id');
-
+    protected $fillable = ['client_id', 'blood_type_id'];
 }
