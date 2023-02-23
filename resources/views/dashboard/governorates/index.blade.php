@@ -45,7 +45,7 @@
                                 @foreach($governorates as $governorate)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $governorate->name }}</td>
+                                        <td><a href="{{ route('governorates.show',$governorate->id) }}">{{$governorate->name}}</a></td>
                                         <td>
                                             <button type="button" class="btn btn-outline-success btn-sm"><a class="text-success" href="{{ route('governorates.edit',$governorate->id) }}">Edit</a></button>
                                         </td>

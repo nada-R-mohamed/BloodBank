@@ -38,7 +38,7 @@ class GovernorateController extends Controller
     public function store(Request $request)
     {
         //validation
-        $request->validate(Governorate::rules());
+        $request->validate(Governorate::rules($request->governorate_id));
         // store in governorate model
         $governorate = Governorate::create($request->all());
         // return redirect to index page with success message
@@ -62,7 +62,7 @@ class GovernorateController extends Controller
                 ->with('error','Governorate not found');
         }
         //return view with governorate
-        return view('governorates.show',compact('governorate'));
+        return view('dashboard.governorates.show',compact('governorate'));
     }
 
     /**

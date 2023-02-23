@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dashboard\CityController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\GovernorateController;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +25,7 @@ Route::group([
 ],function(){
     Route::get('/',[DashboardController::class,'index'])->name('dashboard.index');
     Route::resource('governorates',GovernorateController::class);
+    Route::resource('cities',CityController::class);
 
 });
 

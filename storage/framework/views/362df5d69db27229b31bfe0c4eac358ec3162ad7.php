@@ -45,7 +45,7 @@
                                 <?php $__currentLoopData = $governorates; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $governorate): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr>
                                         <td><?php echo e($loop->iteration); ?></td>
-                                        <td><?php echo e($governorate->name); ?></td>
+                                        <td><a href="<?php echo e(route('governorates.show',$governorate->id)); ?>"><?php echo e($governorate->name); ?></a></td>
                                         <td>
                                             <button type="button" class="btn btn-outline-success btn-sm"><a class="text-success" href="<?php echo e(route('governorates.edit',$governorate->id)); ?>">Edit</a></button>
                                         </td>

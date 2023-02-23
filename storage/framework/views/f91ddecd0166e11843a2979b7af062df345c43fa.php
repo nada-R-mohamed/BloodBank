@@ -22,7 +22,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="" class="nav-link">
+                <a href="<?php echo e(route('cities.index')); ?>" class="nav-link">
                     <p>
                         Cities
                     </p>

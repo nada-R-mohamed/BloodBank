@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\City;
+use App\Models\Governorate;
 use Illuminate\Http\Request;
 
 class CityController extends Controller
@@ -14,7 +16,9 @@ class CityController extends Controller
      */
     public function index()
     {
-        //
+        $cities = City::paginate();
+        return view('dashboard.cities.index', compact('cities'));
+
     }
 
     /**
@@ -24,7 +28,8 @@ class CityController extends Controller
      */
     public function create()
     {
-        //
+        $governorates = Governorate::all();
+        return view('dashboard.cities.create',compact('governorates'));
     }
 
     /**
@@ -35,7 +40,12 @@ class CityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate(City::rules($request->governorate_id));
+        // store in governorate model
+        $governorate = City::create($request->all());
+        // return redirect to index page with success message
+        return redirect()->route('cities.index')
+            ->with('success','City created successfully.');
     }
 
     /**
@@ -46,7 +56,16 @@ class CityController extends Controller
      */
     public function show($id)
     {
-        //
+        //find the city by id
+        try{
+            $city = City::findOrFail($id);
+        }catch (\Exception $e){
+            return redirect()->route('cities.index')
+                ->with('error','City not found');
+        }
+        $governorate = $city->governorate;
+        //return view with cities
+        return view('dashboard.cities.show',compact('city','governorate'));
     }
 
     /**
@@ -57,7 +76,13 @@ class CityController extends Controller
      */
     public function edit($id)
     {
-        //
+        try{
+            $city = City::findOrFail($id);
+        }catch (\Exception $e){
+            return redirect()->route('cities.index')->with('error','City not found');
+        }
+        $governorates = Governorate::all();
+        return view('dashboard.cities.edit', compact('governorates','city'));
     }
 
     /**
@@ -69,7 +94,16 @@ class CityController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // validation for update
+        $request->validate(City::rules($id));
+        // find governorate
+        $city = City::findOrFail($id);
+        //update governorate model
+        $city->update($request->all());
+        //return redirect to index page with success message
+        return redirect()->route('cities.index')
+            ->with('success','City updated successfully.');
+        // return redirect to index page with success message
     }
 
     /**
@@ -78,8 +112,10 @@ class CityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(City $city)
     {
-        //
+        $city->delete();
+        return redirect()->route('cities.index')
+            ->with('success','City deleted successfully.');
     }
 }

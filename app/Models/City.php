@@ -19,4 +19,11 @@ class City extends Model
     {
         return $this->hasMany('App\Models\DonationRequest');
     }
+    public static function rules($cityId=0)
+    {
+        return [
+            'name' => "required|string|min:3|max:255|unique:cities,name,$cityId",
+            'governorate_id' => "required|integer|exists:governorates,id",
+        ];
+    }
 }

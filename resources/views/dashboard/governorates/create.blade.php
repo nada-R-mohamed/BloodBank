@@ -21,7 +21,7 @@
                         <label for="name" class="col-sm-2 col-form-label">Name</label>
                         <div class="col-sm-10">
                             <input type="text"  name="name" class="form-control" id="name" placeholder="governorate name">
-                            @error($name)
+                            @error('name')
                             <div class="alert alert-danger">
                                 {{ $message }}
                             </div>
