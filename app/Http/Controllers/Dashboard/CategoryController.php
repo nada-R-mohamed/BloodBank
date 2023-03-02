@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\Governorate;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -14,7 +16,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::paginate();
+        return view('dashboard.categories.index', compact('categories'));
     }
 
     /**
@@ -24,7 +27,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.categories.create');
     }
 
     /**
@@ -35,7 +38,13 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //validation
+        $request->validate(Category::rules());
+        // store in category model
+        $category = Category::create($request->all());
+        // return redirect to index page with success message
+        return redirect()->route('categories.index')
+            ->with('success','Category created successfully.');
     }
 
     /**
@@ -46,7 +55,15 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        //find the category by id
+        try{
+            $category = Category::findOrFail($id);
+        }catch (\Exception $e){
+            return redirect()->route('categories.index')
+                ->with('error','Category not found');
+        }
+        //return view with governorate
+        return view('dashboard.categories.show',compact('category'));
     }
 
     /**
@@ -57,7 +74,14 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        // check the id parameter is in model
+        try{
+            $category = Category::findOrFail($id);
+        }catch (\Exception $e){
+            return redirect()->route('categories.index')->with('error','category not found');
+        }
+        //return view with the edit form by id parameter
+        return view('dashboard.categories.edit',compact('category'));
     }
 
     /**
@@ -69,7 +93,15 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // validation for update
+        $request->validate(Category::rules());
+        // find governorate
+        $category = Category::findOrFail($id);
+        //update governorate model
+        $category->update($request->all());
+        //return redirect to index page with success message
+        return redirect()->route('categories.index')
+            ->with('success','Category updated successfully.');
     }
 
     /**
@@ -78,8 +110,11 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        //return redirect to index page with success message
+        return redirect()->route('categories.index')
+            ->with('success','Category deleted successfully.');
     }
 }

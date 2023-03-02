@@ -29,7 +29,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{-- route('categories.index') --}}" class="nav-link">
+                <a href="{{ route('categories.index') }}" class="nav-link">
                     <p>
                         Categories
                     </p>
@@ -37,9 +37,17 @@
             </li>
             <li class="nav-item">
 
-                <a href="{{--route('posts.index') --}}" class="nav-link">
+                <a href="{{ route('posts.index') }}" class="nav-link">
                     <p>
                         Posts
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+
+                <a href="{{ route('clients.index') }}" class="nav-link">
+                    <p>
+                        Clients
                     </p>
                 </a>
             </li>

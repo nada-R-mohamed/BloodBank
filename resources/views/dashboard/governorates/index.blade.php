@@ -1,5 +1,5 @@
 @extends('layouts.dashboard')
-
+@section('title','All Governorates')
 @section('content')
     <div class="container">
         <div class="row">

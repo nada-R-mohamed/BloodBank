@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Sanctum\HasApiTokens;
 
 class Client extends Model
 {
-    use HasFactory;
+    use HasFactory,HasApiTokens;
     protected $fillable = [
         'name',
         'phone',
@@ -16,6 +17,7 @@ class Client extends Model
         'date_of_birth',
         'last_donation_date',
         'city_id',
+        'status',
         'blood_type_id',
         'pin_code',
         'device_name',
@@ -55,6 +57,14 @@ class Client extends Model
     public function notificationTokens()
     {
         return $this->hasMany('App\Models\Token');
+    }
+    public function scopeSearch($query, $request){
+        if ($request->has('search')) {
+            $query->where(function($query) use($request){
+                $query->where('name', 'like', '%'. $request->search. '%');
+                $query->orWhere('email', 'like', '%'. $request->search. '%');
+            });
+        }
     }
 
 }

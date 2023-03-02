@@ -32,5 +32,15 @@ class Post extends Model
         if ($request->has('category_id')) {
             $query->where('category_id', $request->category_id);
         }
+
+    }
+    public static function rules($postId=0,$required='')
+    {
+        return [
+            'title' => "required|string|min:3|max:255|unique:posts,title,$postId",
+            'category_id' => "required|integer|exists:categories,id",
+            'content' => "required|string",
+            'image' => "$required|image|mimes:jpeg,png,jpg,gif,svg",
+        ];
     }
 }

@@ -27,7 +27,7 @@ return new class extends Migration
             $table->foreignId('city_id')->nullable()
                 ->constrained('cities','id')
                 ->nullOnDelete();
-            $table->integer('pin_code');
+            $table->integer('pin_code')->nullable();
             $table->string('device_name',60);
             $table->timestamps();
         });

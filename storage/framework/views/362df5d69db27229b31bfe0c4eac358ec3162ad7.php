@@ -1,3 +1,4 @@
+<?php $__env->startSection('title','All Governorates'); ?>
 <?php $__env->startSection('content'); ?>
     <div class="container">
         <div class="row">

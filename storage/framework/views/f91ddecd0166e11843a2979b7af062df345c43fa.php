@@ -29,7 +29,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="" class="nav-link">
+                <a href="<?php echo e(route('categories.index')); ?>" class="nav-link">
                     <p>
                         Categories
                     </p>
@@ -37,9 +37,17 @@
             </li>
             <li class="nav-item">
 
-                <a href="" class="nav-link">
+                <a href="<?php echo e(route('posts.index')); ?>" class="nav-link">
                     <p>
                         Posts
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+
+                <a href="<?php echo e(route('clients.index')); ?>" class="nav-link">
+                    <p>
+                        Clients
                     </p>
                 </a>
             </li>

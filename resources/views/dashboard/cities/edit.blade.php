@@ -36,7 +36,7 @@
                         <div class="col-sm-10">
                             <select name="governorate_id" class="form-control form-select">
                                 <option value="">All Governorates</option>
-                                @foreach($governorates as $governorate)                 {{-- $category->parent_id == $parent->id--}}
+                                @foreach($governorates as $governorate)
                                 <option value="{{ $governorate->id }}"@selected(old('governorate_id', $city->governorate_id) == $governorate->id) >{{ $governorate->name }}</option>
                                 @endforeach
                             </select>

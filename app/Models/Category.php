@@ -13,4 +13,11 @@ class Category extends Model
     {
         return $this->hasMany('App\Models\Post');
     }
+
+    public static function rules($id=0)
+    {
+        return [
+            'name' => "required|string|min:3|max:255|unique:categories,name,$id",
+        ];
+    }
 }

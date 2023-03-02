@@ -103,7 +103,7 @@ class CityController extends Controller
         //return redirect to index page with success message
         return redirect()->route('cities.index')
             ->with('success','City updated successfully.');
-        // return redirect to index page with success message
+
     }
 
     /**
