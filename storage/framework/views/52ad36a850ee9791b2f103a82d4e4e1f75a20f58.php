@@ -5,14 +5,6 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
-    <div class="container">
-
-
-
-
-
-    </div>
-
     <div class="content">
         <div class="container-fluid">
 
@@ -34,7 +26,7 @@
                 <div class="form-group">
                     <form action="" method="get">
                         <div class="col-sm-10">
-                            <input type="text"  name="search" class="form-control" id="name" placeholder="name">
+                            <input type="text"  name="search" class="form-control" id="name" placeholder="search">
                             <button class="btn btn-info"  type="submit">Search</button>
                         </div>
                     </form>

@@ -10,8 +10,7 @@ class ClientController extends Controller
 {
     public function index(Request $request)
     {
-        $clients = Client::search($request)->paginate();
-//        $clients = Client::paginate();
+        $clients = Client::search($request)->with('bloodTypes','governorates')->paginate();
         return view('dashboard.clients.index', compact('clients'));
     }
     public function changeStatus(Request $request, $id)

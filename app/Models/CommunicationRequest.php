@@ -14,4 +14,14 @@ class CommunicationRequest extends Model
     {
         return $this->belongsTo('App\Models\Client');
     }
+    public function scopeSearch($query, $request){
+        if ($request->has('search')) {
+            $query->where(function($query) use($request){
+                $query->where('title', 'like', '%'. $request->search. '%');
+                $query->orWhere('content', 'like', '%'. $request->search. '%');
+                $query->orWhere('is_done', 'like', '%'. $request->search. '%');
+                $query->orWhere('client_id', 'like', '%'. $request->search. '%');
+            });
+        }
+    }
 }

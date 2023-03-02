@@ -51,6 +51,14 @@
                     </p>
                 </a>
             </li>
+            <li class="nav-item">
+
+                <a href="{{ route('contacts.index') }}" class="nav-link">
+                    <p>
+                        Contacts
+                    </p>
+                </a>
+            </li>
 
           <form action="{{ route('logout') }}" method="post">
               @csrf

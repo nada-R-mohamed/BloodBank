@@ -51,6 +51,14 @@
                     </p>
                 </a>
             </li>
+            <li class="nav-item">
+
+                <a href="<?php echo e(route('contacts.index')); ?>" class="nav-link">
+                    <p>
+                        Contacts
+                    </p>
+                </a>
+            </li>
 
           <form action="<?php echo e(route('logout')); ?>" method="post">
               <?php echo csrf_field(); ?>

@@ -1,27 +1,28 @@
-@extends('layouts.dashboard')
-@section('title','All Contents')
-@section('breadcrumb')
-    @parent
+<?php $__env->startSection('title','All Contents'); ?>
+<?php $__env->startSection('breadcrumb'); ?>
+    <?php echo \Illuminate\View\Factory::parentPlaceholder('breadcrumb'); ?>
     <li class="breadcrumb-item active">All Contacts</li>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 
     <div class="content">
         <div class="container-fluid">
 
-            @if(session()->has('success'))
+            <?php if(session()->has('success')): ?>
                 <div class="alert alert-success">
-                    {{ session('success') }}
+                    <?php echo e(session('success')); ?>
+
                 </div>
-            @endif
+            <?php endif; ?>
 
 
-            @if(session()->has('info'))
+            <?php if(session()->has('info')): ?>
                 <div class="alert alert-info">
-                    {{ session('info') }}
+                    <?php echo e(session('info')); ?>
+
                 </div>
-            @endif
+            <?php endif; ?>
             <div class="container-fluid">
                 <div class="form-group">
                     <form action="" method="get">
@@ -54,25 +55,25 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($contacts as $contact)
+                                    <?php $__currentLoopData = $contacts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $contact): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $contact->client_id }}</td>
-                                            <td>{{ $contact->client->name }}</td>
-                                            <td>{{ $contact->client->email }}</td>
-                                            <td>{{ $contact->client->phone }}</td>
-                                            <td>{{ $contact->title }}</td>
-                                            <td>{{ $contact->content }}</td>
-                                            <td>{{ ($contact->is_done == 0) ? 'No' : 'yes' }}</td>
+                                            <td><?php echo e($loop->iteration); ?></td>
+                                            <td><?php echo e($contact->client_id); ?></td>
+                                            <td><?php echo e($contact->client->name); ?></td>
+                                            <td><?php echo e($contact->client->email); ?></td>
+                                            <td><?php echo e($contact->client->phone); ?></td>
+                                            <td><?php echo e($contact->title); ?></td>
+                                            <td><?php echo e($contact->content); ?></td>
+                                            <td><?php echo e(($contact->is_done == 0) ? 'No' : 'yes'); ?></td>
                                             <td>
-                                                <form action="{{ route('contacts.destroy',$contact->id) }}" method="post">
-                                                    @csrf
-                                                    @method('Delete')
+                                                <form action="<?php echo e(route('contacts.destroy',$contact->id)); ?>" method="post">
+                                                    <?php echo csrf_field(); ?>
+                                                    <?php echo method_field('Delete'); ?>
                                                     <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
                                                 </form>
                                             </td>
                                         </tr>
-                                    @endforeach
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                                     </tbody>
                                 </table>
@@ -81,11 +82,14 @@
                             <!-- /.card-body -->
                         </div>
                     </div>
-                    {{ $contacts->withQueryString()->links() }}
+                    <?php echo e($contacts->withQueryString()->links()); ?>
+
                 </div>
             </div>
             <!-- /.card -->
         </div>
     </div>
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.dashboard', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\bloodbank\resources\views/dashboard/contacts/index.blade.php ENDPATH**/ ?>
