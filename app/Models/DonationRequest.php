@@ -44,4 +44,15 @@ class DonationRequest extends Model
     {
         return $this->belongsTo('App\Models\BloodType');
     }
+    public function scopeSearch($query, $request){
+        if ($request->has('search')) {
+            $query->where(function($query) use($request){
+                $query->where('patient_name', 'like', '%'. $request->search. '%');
+                $query->orWhere('patient_phone', 'like', '%'. $request->search. '%');
+                $query->orWhere('patient_age', 'like', '%'. $request->search. '%');
+                $query->orWhere('blood_type_id', 'like', '%'. $request->search. '%');
+                $query->orWhere('bags_num', 'like', '%'. $request->search. '%');
+            });
+        }
+    }
 }

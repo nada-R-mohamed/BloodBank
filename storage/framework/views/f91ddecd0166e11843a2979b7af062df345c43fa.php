@@ -52,10 +52,23 @@
                 </a>
             </li>
             <li class="nav-item">
-
                 <a href="<?php echo e(route('contacts.index')); ?>" class="nav-link">
                     <p>
                         Contacts
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="<?php echo e(route('donation-requests.index')); ?>" class="nav-link">
+                    <p>
+                        Donation Requests
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <p>
+                        Settings
                     </p>
                 </a>
             </li>

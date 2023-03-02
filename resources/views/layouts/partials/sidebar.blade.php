@@ -52,10 +52,23 @@
                 </a>
             </li>
             <li class="nav-item">
-
                 <a href="{{ route('contacts.index') }}" class="nav-link">
                     <p>
                         Contacts
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('donation-requests.index') }}" class="nav-link">
+                    <p>
+                        Donation Requests
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <p>
+                        Settings
                     </p>
                 </a>
             </li>
