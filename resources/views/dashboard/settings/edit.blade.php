@@ -1,5 +1,4 @@
 @extends('layouts.dashboard')
-{{--@inject('setting','App\Models\Setting')--}}
 @section('breadcrumb')
     @parent
     <li class="breadcrumb-item active">Setting</li>
@@ -13,13 +12,25 @@
                     <div class="card-header mb-auto">
                         <h3 class="card-title">Setting</h3>
                     </div>
+                    @if(session()->has('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
+
+                    @if(session()->has('info'))
+                        <div class="alert alert-info">
+                            {{ session('info') }}
+                        </div>
+                    @endif
                     <!-- /.card-header -->
-                   <form class="form-horizontal" action="#" method="post">
+                   <form class="form-horizontal" action="{{ route('settings.update',$setting->id) }}" method="post">
                         @csrf
                         @method('PUT')
                         <div class="card-body">
                             <div class="form-group row">
-                                <label for="title" class="col-sm-2 col-form-label">Title</label>
+                                <label for="title" class="col-sm-2 col-form-label">Notification Setting Text</label>
                                 <div class="col-sm-10">
                                     <input type="text"  name="notification_setting_text" class="form-control" value="{{ old('notification_setting_text',$setting->notification_setting_text) }}" id="notification_setting_text" >
                                     @error('notification_setting_text')

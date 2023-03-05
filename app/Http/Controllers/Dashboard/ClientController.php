@@ -16,10 +16,14 @@ class ClientController extends Controller
     public function changeStatus(Request $request, $id)
     {
        //find client by id
-       $client = Client::find($id);
-       $client->status = !$client->status;
+       $client = Client::findOrFail($id);
+       if($client->status == 'active'){
+           $client->status = 'inactive';
+       }else{
+           $client->status = 'active';
+       }
        $client->save();
-       return redirect()->route('clients.index')->with('success', 'Client Updated Successfully');
+       return redirect()->route('clients.index')->with('success', 'Client Updated status Successfully');
     }
     public function destroy(Client $client)
     {

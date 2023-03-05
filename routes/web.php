@@ -44,7 +44,8 @@ Route::group([
     Route::get('clients/{id}/change-status',[ClientController::class,'changeStatus'])->name('clients.status');
     Route::resource('contacts',CommunicationRequestController::class)->only('index','destroy');
     Route::resource('donation-requests', DonationRequestController::class)->only('index','destroy','show');
-    Route::resource('settings',SettingController::class)->only('index','edit','update');
+    Route::put('settings/{setting}',[SettingController::class, 'update'])->name('settings.update');
+    Route::get('settings',[SettingController::class,'index'])->name('settings.index');
     Route::get('/change-password', [UserController::class, 'changePassword'])->name('change-password');
     Route::post('/change-password', [UserController::class, 'updatePassword'])->name('update-password');
 

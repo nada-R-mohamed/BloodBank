@@ -11,32 +11,25 @@ class SettingController extends Controller
 
     public function index()
     {
-        return view('dashboard.settings.edit');
+        $setting = Setting::first();
+
+        return view('dashboard.settings.edit' , compact('setting'));
 
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function update(Request $request , Setting $setting)
     {
-//        $setting = Setting::findOrFail($id);
-//        return view('dashboard.settings.edit', compact('setting'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        $request->validate([
+            'notification_setting_text'=> 'required|string',
+            'about_app'=> 'required|string',
+            'phone' => 'required|string',
+            'email'=> 'required|string',
+            'facebook_url' => 'required|string',
+            'twitter_url' => 'required',
+            'instagram_url' => 'required|string',
+            'youtube_url' => 'required|string'
+        ]);
+        $setting->update($request->all());
+        return redirect()->route('settings.index')->with('success', 'Setting Updated Successfully');
     }
 
 }

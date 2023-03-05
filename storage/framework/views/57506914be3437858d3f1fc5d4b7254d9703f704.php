@@ -11,13 +11,27 @@
                     <div class="card-header mb-auto">
                         <h3 class="card-title">Setting</h3>
                     </div>
+                    <?php if(session()->has('success')): ?>
+                        <div class="alert alert-success">
+                            <?php echo e(session('success')); ?>
+
+                        </div>
+                    <?php endif; ?>
+
+
+                    <?php if(session()->has('info')): ?>
+                        <div class="alert alert-info">
+                            <?php echo e(session('info')); ?>
+
+                        </div>
+                    <?php endif; ?>
                     <!-- /.card-header -->
-                   <form class="form-horizontal" action="#" method="post">
+                   <form class="form-horizontal" action="<?php echo e(route('settings.update',$setting->id)); ?>" method="post">
                         <?php echo csrf_field(); ?>
                         <?php echo method_field('PUT'); ?>
                         <div class="card-body">
                             <div class="form-group row">
-                                <label for="title" class="col-sm-2 col-form-label">Title</label>
+                                <label for="title" class="col-sm-2 col-form-label">Notification Setting Text</label>
                                 <div class="col-sm-10">
                                     <input type="text"  name="notification_setting_text" class="form-control" value="<?php echo e(old('notification_setting_text',$setting->notification_setting_text)); ?>" id="notification_setting_text" >
                                     <?php $__errorArgs = ['notification_setting_text'];

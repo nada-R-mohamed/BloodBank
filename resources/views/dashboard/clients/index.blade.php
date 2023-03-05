@@ -72,16 +72,6 @@
                                                         Activate
                                                     @endif
                                                 </a>
-{{--                                                <form action="{{ route('clients.status',$client->id) }}" method="get">--}}
-{{--                                                    <div class="btn-group btn-group-toggle" data-toggle="buttons">--}}
-{{--                                                        <label class="btn bg-olive active">--}}
-{{--                                                            <input type="radio" name="status" value="active" {{ ($client->status=="active")? "checked" : "" }}>active--}}
-{{--                                                        </label>--}}
-{{--                                                        <label class="btn bg-danger">--}}
-{{--                                                            <input type="radio" name="status" value="inactive" {{ ($client->status=="inactive")? "checked" : "" }}>inactive--}}
-{{--                                                        </label>--}}
-{{--                                                    </div>--}}
-{{--                                                </form>--}}
                                             </td>
                                             <td>
                                                 <form action="{{ route('clients.destroy',$client->id) }}" method="post">

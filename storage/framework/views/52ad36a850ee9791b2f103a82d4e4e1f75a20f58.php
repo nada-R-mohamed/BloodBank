@@ -73,16 +73,6 @@
                                                         Activate
                                                     <?php endif; ?>
                                                 </a>
-
-
-
-
-
-
-
-
-
-
                                             </td>
                                             <td>
                                                 <form action="<?php echo e(route('clients.destroy',$client->id)); ?>" method="post">
