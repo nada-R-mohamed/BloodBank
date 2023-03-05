@@ -8,6 +8,8 @@ use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\DonationRequestController;
 use App\Http\Controllers\Dashboard\GovernorateController;
 use App\Http\Controllers\Dashboard\PostController;
+use App\Http\Controllers\Dashboard\SettingController;
+use App\Http\Controllers\Dashboard\UserController;
 use App\Models\CommunicationRequest;
 use Illuminate\Support\Facades\Route;
 
@@ -39,9 +41,14 @@ Route::group([
     Route::resource('categories',CategoryController::class);
     Route::resource('posts',PostController::class);
     Route::resource('clients',ClientController::class)->only('index','destroy','edit');
-    Route::get('clients/status',[ClientController::class,'changeStatus'])->name('clients.status');
+    Route::get('clients/{id}/change-status',[ClientController::class,'changeStatus'])->name('clients.status');
     Route::resource('contacts',CommunicationRequestController::class)->only('index','destroy');
     Route::resource('donation-requests', DonationRequestController::class)->only('index','destroy','show');
+    Route::resource('settings',SettingController::class)->only('index','edit','update');
+    Route::get('/change-password', [UserController::class, 'changePassword'])->name('change-password');
+    Route::post('/change-password', [UserController::class, 'updatePassword'])->name('update-password');
+
+
 
 
 });

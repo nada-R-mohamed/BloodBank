@@ -1,3 +1,4 @@
+<?php $setting = app('App\Models\Setting'); ?>
 <div class="sidebar">
     <!-- Sidebar user panel (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
@@ -66,9 +67,16 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="<?php echo e(route('settings.index')); ?>" class="nav-link">
                     <p>
                         Settings
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="<?php echo e(route('change-password')); ?>" class="nav-link">
+                    <p>
+                        Change Password
                     </p>
                 </a>
             </li>

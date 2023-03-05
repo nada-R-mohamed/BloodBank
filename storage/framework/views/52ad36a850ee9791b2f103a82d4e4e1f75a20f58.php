@@ -66,16 +66,23 @@
                                             <td><?php echo e($client->last_donation_date); ?></td>
                                             <td><?php echo e($client->city_id); ?></td>
                                             <td>
-                                                <form action="<?php echo e(route('clients.status',$client->id)); ?>" method="get">
-                                                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                                        <label class="btn bg-olive active">
-                                                            <input type="radio" name="status" value="active" <?php echo e(($client->status=="active")? "checked" : ""); ?>>active
-                                                        </label>
-                                                        <label class="btn bg-danger">
-                                                            <input type="radio" name="status" value="inactive" <?php echo e(($client->status=="inactive")? "checked" : ""); ?>>inactive
-                                                        </label>
-                                                    </div>
-                                                </form>
+                                                <a href="<?php echo e(url(route('clients.status',$client->id))); ?>">
+                                                    <?php if($client->status=="active"): ?>
+                                                        Deactivat
+                                                    <?php else: ?>
+                                                        Activate
+                                                    <?php endif; ?>
+                                                </a>
+
+
+
+
+
+
+
+
+
+
                                             </td>
                                             <td>
                                                 <form action="<?php echo e(route('clients.destroy',$client->id)); ?>" method="post">

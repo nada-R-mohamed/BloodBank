@@ -1,5 +1,4 @@
 @extends('layouts.dashboard')
-{{--@section('title','Governorate')--}}
 @section('breadcrumb')
     @parent
     <li class="breadcrumb-item active">Category</li>

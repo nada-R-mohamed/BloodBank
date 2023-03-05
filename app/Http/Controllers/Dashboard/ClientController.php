@@ -15,12 +15,9 @@ class ClientController extends Controller
     }
     public function changeStatus(Request $request, $id)
     {
-       $request->validate([
-           'status' => 'string|in:active,inactive',
-       ]);
        //find client by id
        $client = Client::find($id);
-       $client->status = $request->status;
+       $client->status = !$client->status;
        $client->save();
        return redirect()->route('clients.index')->with('success', 'Client Updated Successfully');
     }
