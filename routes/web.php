@@ -27,6 +27,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
 Auth::routes([
     'register' => false
 ]);
@@ -48,9 +49,7 @@ Route::group([
     Route::get('settings',[SettingController::class,'index'])->name('settings.index');
     Route::get('/change-password', [UserController::class, 'changePassword'])->name('change-password');
     Route::post('/change-password', [UserController::class, 'updatePassword'])->name('update-password');
-
-
-
+    Route::resource('users',UserController::class);
 
 });
 
