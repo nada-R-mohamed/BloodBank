@@ -74,6 +74,13 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="{{ route('roles.index') }}" class="nav-link">
+                    <p>
+                        Roles
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="{{ route('settings.index') }}" class="nav-link">
                     <p>
                         Settings

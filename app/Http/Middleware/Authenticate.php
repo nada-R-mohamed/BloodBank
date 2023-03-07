@@ -25,7 +25,6 @@ class Authenticate extends Middleware
     protected function unauthenticated($request, array $guards)
     {
         if(! Auth::guard('sanctum')->check()) {
-
             abort(response()->json(['error' => 'Unauthenticated.'], 401));
         }
     }

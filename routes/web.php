@@ -8,6 +8,7 @@ use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\DonationRequestController;
 use App\Http\Controllers\Dashboard\GovernorateController;
 use App\Http\Controllers\Dashboard\PostController;
+use App\Http\Controllers\Dashboard\RoleController;
 use App\Http\Controllers\Dashboard\SettingController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Models\CommunicationRequest;
@@ -35,6 +36,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::group([
     'prefix' => 'dashboard',
+    'middleware' => 'auth',
+
 ],function(){
     Route::get('/',[DashboardController::class,'index'])->name('dashboard.index');
     Route::resource('governorates',GovernorateController::class);
@@ -50,6 +53,7 @@ Route::group([
     Route::get('/change-password', [UserController::class, 'changePassword'])->name('change-password');
     Route::post('/change-password', [UserController::class, 'updatePassword'])->name('update-password');
     Route::resource('users',UserController::class);
+    Route::resource('roles',RoleController::class);
 
 });
 

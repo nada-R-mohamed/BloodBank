@@ -74,6 +74,13 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="<?php echo e(route('roles.index')); ?>" class="nav-link">
+                    <p>
+                        Roles
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="<?php echo e(route('settings.index')); ?>" class="nav-link">
                     <p>
                         Settings
