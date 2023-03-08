@@ -8,7 +8,7 @@ use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\DonationRequestController;
 use App\Http\Controllers\Dashboard\GovernorateController;
 use App\Http\Controllers\Dashboard\PostController;
-use App\Http\Controllers\Dashboard\RoleController;
+use App\Http\Controllers\Dashboard\RoleAndPermissionController;
 use App\Http\Controllers\Dashboard\SettingController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Models\CommunicationRequest;
@@ -50,10 +50,10 @@ Route::group([
     Route::resource('donation-requests', DonationRequestController::class)->only('index','destroy','show');
     Route::put('settings/{setting}',[SettingController::class, 'update'])->name('settings.update');
     Route::get('settings',[SettingController::class,'index'])->name('settings.index');
+    Route::resource('users',UserController::class);
     Route::get('/change-password', [UserController::class, 'changePassword'])->name('change-password');
     Route::post('/change-password', [UserController::class, 'updatePassword'])->name('update-password');
-    Route::resource('users',UserController::class);
-    Route::resource('roles',RoleController::class);
+    Route::resource('roles',RoleAndPermissionController::class);
 
 });
 

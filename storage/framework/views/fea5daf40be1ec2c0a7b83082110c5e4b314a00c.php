@@ -39,6 +39,7 @@
                                     <tr>
                                         <th style="width: 10px">#</th>
                                         <th>Name</th>
+                                        <th>Role</th>
                                         <th style="width: 100px">Actions</th>
                                     </tr>
                                     </thead>
@@ -47,6 +48,7 @@
                                         <tr>
                                             <td><?php echo e($loop->iteration); ?></td>
                                             <td><a href="<?php echo e(route('users.show',$user->id)); ?>"><?php echo e($user->name); ?></a></td>
+                                            <td><?php echo e($user->role); ?></td>
                                             <td>
                                                 <button type="button" class="btn btn-outline-success btn-sm"><a class="text-success" href="<?php echo e(route('users.edit',$user->id)); ?>">Edit</a></button>
                                             </td>

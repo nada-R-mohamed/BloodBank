@@ -1,4 +1,5 @@
 @extends('layouts.dashboard')
+@inject('permissions','App\Models\Permission')
 @section('breadcrumb')
     @parent
     <li class="breadcrumb-item active">Roles</li>
@@ -17,7 +18,7 @@
             @csrf
             <div class="card-body">
                 <div class="form-group row">
-                    <label for="name" class="col-sm-2 col-form-label">Name</label>
+                    <label for="name" class="col-sm-2 col-form-label">Role Name :</label>
                     <div class="col-sm-10">
                         <input type="text"  name="name" class="form-control" id="name" placeholder="Role name">
                         @error('name')
@@ -27,16 +28,23 @@
                         @enderror
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label for="guard_name" class="col-sm-2 col-form-label">Guard Name</label>
-                    <div class="col-sm-10">
-                        <input type="text"  name="guard_name" class="form-control" id="guard_name" placeholder="guard name">
-                        @error('guard_name')
+                <div class="form-group">
+                    <label for="guard_name" class="form-label">Permissions :</label><br>
+                    <input id="select-all" type="checkbox"><label for='select-all'>Select All</label>
+                    <br>
+                   <div class="row">
+                     @foreach($permissions->all() as $permission)
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" name="permissions[]" type="checkbox" id="inlineCheckbox1" value="{{ $permission->id }}">
+                            <label class="form-check-label" for="inlineCheckbox1">{{ $permission->name }}</label>
+                        </div>
+                        @error('permissions')
                         <div class="alert alert-danger">
                             {{ $message }}
                         </div>
                         @enderror
-                    </div>
+                    @endforeach
+                   </div>
                 </div>
             </div>
             <!-- /.card-body -->
@@ -48,5 +56,14 @@
     </div>
     <!-- /.card -->
 @endsection
+
+@push('scripts')
+    <script>
+        $("#select-all").click(function() {
+            $("input[type=checkbox]").prop("checked", $(this).prop("checked"));
+        });
+
+    </script>
+@endpush
 
 

@@ -17,16 +17,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-
-
-        Category::factory(8)->create();
-        Post::factory(14)->create();
+        $this->call([
+            RoleAndPermisionsSeeder::class,
+            UserSeeder::class
+        ]);
+//        Category::factory(8)->create();
+//        Post::factory(14)->create();
         // \App\Models\User::factory(10)->create();
 
-         \App\Models\User::factory()->create([
-             'name' => 'Nada Raafat',
-             'email' => 'nada@admin.com',
-             'password' => Hash::make('password'),
-         ]);
+//         \App\Models\User::factory()->create([
+//             'name' => 'Nada Raafat',
+//             'email' => 'nada@admin.com',
+//             'password' => Hash::make('password'),
+//         ]);
     }
 }

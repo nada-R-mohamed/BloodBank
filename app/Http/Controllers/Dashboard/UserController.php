@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
-use App\Models\Role;
+use App\Models\Client;
+use Spatie\Permission\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -43,10 +44,16 @@ class UserController extends Controller
     {
         //validation
         $request->validate([
-
+            'name' => 'required|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|string|min:6|confirmed',
+            'role' => 'required|string',['exists:roles,name'],
         ]);
-        // store in user model
-        $user = User::create($request->all());
+        $data = $request->except('password');
+        //password hashing
+        $data['password'] = Hash::make($request->password);
+        // store user
+        $user = User::create($data);
         // return redirect to index page with success message
         return redirect()->route('users.index')
             ->with('success','User created successfully.');
@@ -82,11 +89,12 @@ class UserController extends Controller
         // check the id parameter is in model
         try{
             $user = User::findOrFail($id);
+            $roles = Role::all();
         }catch (\Exception $e){
             return redirect()->route('users.index')->with('error','User not found');
         }
         //return view with the edit form by id parameter
-        return view('dashboard.users.edit',compact('user'));
+        return view('dashboard.users.edit',compact('user','roles'));
     }
 
     /**
@@ -98,12 +106,24 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // validation for update
-        $request->validate([]);
-        // find user
         $user = User::findOrFail($id);
+        // validation for update
+        $data = [
+            'name' => 'max:255',
+            'email' => "email|unique:users,email,$id",
+            'role' => 'string',['exists:roles,name'],
+        ];
+        $request->validate($data, [
+            'password' => $request->password != null ?'sometimes|required|min:8|confirmed': ''
+        ]);
+
+        if($request->has('password'))
+        {
+            $data = $request->except('password');
+            $data['password'] = Hash::make($request->password);
+        }
         //update user model
-        $user->update($request->all());
+        $user->update($data);
         //return redirect to index page with success message
         return redirect()->route('users.index')
             ->with('success','User updated successfully.');

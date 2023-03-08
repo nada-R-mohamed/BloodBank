@@ -38,6 +38,7 @@
                                     <tr>
                                         <th style="width: 10px">#</th>
                                         <th>Name</th>
+                                        <th>Role</th>
                                         <th style="width: 100px">Actions</th>
                                     </tr>
                                     </thead>
@@ -46,6 +47,7 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td><a href="{{ route('users.show',$user->id) }}">{{$user->name}}</a></td>
+                                            <td>{{ $user->role }}</td>
                                             <td>
                                                 <button type="button" class="btn btn-outline-success btn-sm"><a class="text-success" href="{{ route('users.edit',$user->id) }}">Edit</a></button>
                                             </td>

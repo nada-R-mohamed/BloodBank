@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Models\Role;
 use Illuminate\Http\Request;
-
-class RoleController extends Controller
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+class RoleAndPermissionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -40,10 +40,15 @@ class RoleController extends Controller
         //validation
         $request->validate([
             'name' => 'required|string|max:255|unique:roles,name',
-            'guard_name' => 'required|string||max:255|unique:roles,guard_name',
+            'permissions' => ['required','array'],['exists:permissions,name'],
+
+
         ]);
         // store in role model
-        $role = Role::create($request->all());
+        $role = Role::create(['name' => $request->name]);
+        // assign permission to role
+        $role->givePermissionTo($request->permissions);
+
         // return redirect to index page with success message
         return redirect()->route('roles.index')
             ->with('success','Role created successfully.');
@@ -60,12 +65,13 @@ class RoleController extends Controller
         //find the role by id
         try{
             $role = Role::findOrFail($id);
+            $permissions = $role->permissions;
         }catch (\Exception $e){
             return redirect()->route('roles.index')
                 ->with('info','Role not found');
         }
         //return view with role data
-        return view('dashboard.roles.show',compact('role'));
+        return view('dashboard.roles.show',compact('role','permissions'));
     }
 
     /**
@@ -95,15 +101,17 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // validation for update
+        //validation
         $request->validate([
-            'name' => 'required|string|max:255|unique:roles,name',
-            'guard_name' => 'required|string||max:255|unique:roles,guard_name',
+            'name' => "required|string|max:255|unique:roles,name,$id",
+            'permissions' => ['array'],['exists:permissions,name'],
+
         ]);
         // find role
         $role = Role::findOrFail($id);
         //update role model
         $role->update($request->all());
+        $role->permissions()->sync($request->permissions);
         //return redirect to index page with success message
         return redirect()->route('roles.index')
             ->with('success','Role updated successfully.');
