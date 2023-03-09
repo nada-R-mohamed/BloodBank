@@ -16,7 +16,7 @@
                     <div class="card-body p-0">
                         <div class="card-body">
                             <div class="form-group row">
-                                <label for="guard_name" class="form-label">User Name :   </label>
+                                <label for="guard_name" class="form-label">User Name : </label>
                                 <div class="col-sm-10">
                                     {{ $user->name }}
                                 </div>
@@ -24,7 +24,7 @@
                             <div class="form-group row">
                                 <label for="guard_name" class="form-label">Permissions :</label>
                                 <div class="col-sm-10">
-                                   {{ $user->role }}
+                                    {{ $user->role }}
                                 </div>
                             </div>
                         </div>
@@ -36,7 +36,6 @@
         </div>
     </div>
     <!-- /.card -->
-
 
 @endsection
 

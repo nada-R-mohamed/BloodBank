@@ -20,7 +20,7 @@
                 <div class="form-group row">
                     <label for="name" class="col-sm-2 col-form-label">Role Name :</label>
                     <div class="col-sm-10">
-                        <input type="text"  name="name" class="form-control" id="name" placeholder="Role name">
+                        <input type="text" name="name" class="form-control" id="name" placeholder="Role name">
                         @error('name')
                         <div class="alert alert-danger">
                             {{ $message }}
@@ -32,19 +32,20 @@
                     <label for="guard_name" class="form-label">Permissions :</label><br>
                     <input id="select-all" type="checkbox"><label for='select-all'>Select All</label>
                     <br>
-                   <div class="row">
-                     @foreach($permissions->all() as $permission)
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" name="permissions[]" type="checkbox" id="inlineCheckbox1" value="{{ $permission->id }}">
-                            <label class="form-check-label" for="inlineCheckbox1">{{ $permission->name }}</label>
-                        </div>
-                        @error('permissions')
-                        <div class="alert alert-danger">
-                            {{ $message }}
-                        </div>
-                        @enderror
-                    @endforeach
-                   </div>
+                    <div class="row">
+                        @foreach($permissions->all() as $permission)
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" name="permissions[]" type="checkbox"
+                                       id="inlineCheckbox1" value="{{ $permission->id }}">
+                                <label class="form-check-label" for="inlineCheckbox1">{{ $permission->name }}</label>
+                            </div>
+                            @error('permissions')
+                            <div class="alert alert-danger">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        @endforeach
+                    </div>
                 </div>
             </div>
             <!-- /.card-body -->
@@ -59,7 +60,7 @@
 
 @push('scripts')
     <script>
-        $("#select-all").click(function() {
+        $("#select-all").click(function () {
             $("input[type=checkbox]").prop("checked", $(this).prop("checked"));
         });
 

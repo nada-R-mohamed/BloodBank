@@ -29,7 +29,7 @@
                         <div class="form-group row">
                             <label for="content" class="col-sm-2 col-form-label">Content</label>
                             <div class="col-sm-10">
-                               {{ $post->content }}
+                                {{ $post->content }}
                             </div>
                         </div>
                         <div class="form-group row">

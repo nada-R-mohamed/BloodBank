@@ -32,7 +32,8 @@
                 <div class="form-group row">
                     <label for="name" class="col-sm-2 col-form-label">Name</label>
                     <div class="col-sm-10">
-                        <input type="text"  name="name" value="{{ old('name',$role->name) }}" class="form-control mb-3" id="name" placeholder="role name">
+                        <input type="text" name="name" value="{{ old('name',$role->name) }}" class="form-control mb-3"
+                               id="name" placeholder="role name">
                         @error('name')
                         <div class="alert alert-danger">
                             {{ $message }}
@@ -47,10 +48,11 @@
                     <div class="row">
                         @foreach($list_of_permission->all() as $permission )
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" name="permissions[]" type="checkbox" id="inlineCheckbox1" value="{{ $permission->id }}"
-                                            @if($role->hasPermissionTo($permission->name))
-                                                checked
-                                            @endif
+                                <input class="form-check-input" name="permissions[]" type="checkbox"
+                                       id="inlineCheckbox1" value="{{ $permission->id }}"
+                                       @if($role->hasPermissionTo($permission->name))
+                                           checked
+                                    @endif
                                 >
                                 <label class="form-check-label" for="inlineCheckbox1">{{ $permission->name }}</label>
                             </div>
@@ -75,7 +77,7 @@
 
 @push('scripts')
     <script>
-        $("#select-all").click(function() {
+        $("#select-all").click(function () {
             $("input[type=checkbox]").prop("checked", $(this).prop("checked"));
         });
 

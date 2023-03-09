@@ -1,9 +1,9 @@
 <x-mail::message>
-# Introduction
+    # Introduction
 
-Reset Password Code Blood Bank
+    Reset Password Code Blood Bank
 
-<h4>Your Reset Password Code Is : {{$pin_code}}</h4>
-Thanks,<br>
-{{ config('app.name') }}
+    <h4>Your Reset Password Code Is : {{$pin_code}}</h4>
+    Thanks,<br>
+    {{ config('app.name') }}
 </x-mail::message>

@@ -19,7 +19,7 @@
                 <div class="form-group row">
                     <label for="name" class="col-sm-2 col-form-label">Name</label>
                     <div class="col-sm-10">
-                        <input type="text"  name="name" class="form-control" id="name" placeholder="city name">
+                        <input type="text" name="name" class="form-control" id="name" placeholder="city name">
                         @error('name')
                         <div class="alert alert-danger">
                             {{ $message }}
@@ -36,7 +36,8 @@
                             <select name="governorate_id" class="form-control form-select">
                                 <option value="">All Governorates</option>
                                 @foreach($governorates as $governorate)
-                                <option value="{{ $governorate->id }}" {{old('governorate_id') }}>{{ $governorate->name }}</option>
+                                    <option
+                                        value="{{ $governorate->id }}" {{old('governorate_id') }}>{{ $governorate->name }}</option>
                                 @endforeach
                             </select>
                             @error('governorate_id')
@@ -45,8 +46,8 @@
                             </div>
                             @enderror
                         </div>
-                @endif
-                </div>
+                        @endif
+                    </div>
             </div>
             <!-- /.card-body -->
             <div class="card-footer">

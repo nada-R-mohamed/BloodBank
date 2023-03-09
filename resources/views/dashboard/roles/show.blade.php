@@ -16,18 +16,18 @@
                     <div class="card-body p-0">
                         <div class="card-body">
                             <div class="form-group row">
-                                <label for="guard_name" class="form-label">Role Name :   </label>
+                                <label for="guard_name" class="form-label">Role Name : </label>
                                 <div class="col-sm-10">
-                                   {{ $role->name }}
+                                    {{ $role->name }}
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="guard_name" class="form-label">Permissions :</label>
-                                        <div class="col-sm-10">
-                                            @foreach($permissions as $permission)
-                                            {{ $loop->iteration . "-  " . $permission->name." , " }}
-                                            @endforeach
-                                        </div>
+                                <div class="col-sm-10">
+                                    @foreach($permissions as $permission)
+                                        {{ $loop->iteration . "-  " . $permission->name." , " }}
+                                    @endforeach
+                                </div>
                             </div>
                         </div>
                         <!-- /.card-body -->

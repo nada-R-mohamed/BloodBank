@@ -1,17 +1,15 @@
-@extends('layouts.dashboard')
-{{--@section('title','Governorate')--}}
-@section('breadcrumb')
-    @parent
-    <li class="breadcrumb-item active">Governorate</li>
-@endsection
+<?php $__env->startSection('breadcrumb'); ?>
+    <?php echo \Illuminate\View\Factory::parentPlaceholder('breadcrumb'); ?>
+    <li class="breadcrumb-item active">Category</li>
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header mb-auto">
-                        <h3 class="card-title">{{ $governorate->name }}</h3>
+                        <h3 class="card-title"><?php echo e($category->name); ?></h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body p-0">
@@ -19,13 +17,13 @@
                             <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>Governorate Name</th>
+                                <th>Category Name</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
-                                <td>{{ $governorate->id }}</td>
-                                <td>{{ $governorate->name }}</td>
+                                <td><?php echo e($category->id); ?></td>
+                                <td><?php echo e($category->name); ?></td>
                             </tr>
                             </tbody>
                         </table>
@@ -40,6 +38,8 @@
     </div>
     </div>
 
-@endsection
+<?php $__env->stopSection(); ?>
 
 
+
+<?php echo $__env->make('layouts.dashboard', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\bloodbank\resources\views/dashboard/categories/show.blade.php ENDPATH**/ ?>

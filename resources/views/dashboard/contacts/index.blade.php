@@ -26,8 +26,8 @@
                 <div class="form-group">
                     <form action="" method="get">
                         <div class="col-sm-10">
-                            <input type="text"  name="search" class="form-control" id="name" placeholder="search">
-                            <button class="btn btn-info"  type="submit">Search</button>
+                            <input type="text" name="search" class="form-control" id="name" placeholder="search">
+                            <button class="btn btn-info" type="submit">Search</button>
                         </div>
                     </form>
                 </div>
@@ -64,14 +64,18 @@
                                             <td>{{ $contact->title }}</td>
                                             <td>{{ $contact->content }}</td>
                                             <td>{{ ($contact->is_done == 0) ? 'No' : 'yes' }}</td>
-                                            @can('contact delete')
-                                            <td>
-                                                <form action="{{ route('contacts.destroy',$contact->id) }}" method="post">
-                                                    @csrf
-                                                    @method('Delete')
-                                                    <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
-                                                </form>
-                                            </td>
+                                            @can('contacts delete')
+                                                <td>
+                                                    <form action="{{ route('contacts.destroy',$contact->id) }}"
+                                                          method="post">
+                                                        @csrf
+                                                        @method('Delete')
+                                                        <button type="submit"
+                                                                class="btn btn-outline-danger btn-sm btn-flat show_confirm"
+                                                                data-toggle="tooltip" title='Delete'>Delete
+                                                        </button>
+                                                    </form>
+                                                </td>
                                             @endcan
                                         </tr>
                                     @endforeach
@@ -91,3 +95,27 @@
     </div>
 
 @endsection
+@push('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+    <script type="text/javascript">
+
+        $('.show_confirm').click(function (event) {
+            var form = $(this).closest("form");
+            var name = $(this).data("name");
+            event.preventDefault();
+            swal({
+                title: `Are you sure you want to delete this record?`,
+                text: "If you delete this, it will be gone forever.",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        form.submit();
+                    }
+                });
+        });
+
+    </script>
+@endpush
