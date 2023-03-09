@@ -120,9 +120,11 @@
 
                         </div>
                         <!-- /.card-body -->
+                       @can('settings edit')
                         <div class="card-footer">
                             <button type="submit" class="btn btn-info" name="submit">Update</button>
                         </div>
+                       @endcan
                         <!-- /.card-footer -->
                     </form>
                     <!-- /.card-body -->

@@ -15,6 +15,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column">
             <!-- Add icons to the links using the .nav-icon class
                  with font-awesome or any other icon font library -->
+            @can('governorate view')
             <li class="nav-item">
                 <a href="{{ route('governorates.index') }}" class="nav-link">
                     <p>
@@ -22,6 +23,8 @@
                     </p>
                 </a>
             </li>
+            @endcan
+            @can('cities view')
             <li class="nav-item">
                 <a href="{{ route('cities.index') }}" class="nav-link">
                     <p>
@@ -29,6 +32,8 @@
                     </p>
                 </a>
             </li>
+            @endcan
+            @can('categories view')
             <li class="nav-item">
                 <a href="{{ route('categories.index') }}" class="nav-link">
                     <p>
@@ -36,6 +41,8 @@
                     </p>
                 </a>
             </li>
+            @endcan
+            @can('posts view')
             <li class="nav-item">
 
                 <a href="{{ route('posts.index') }}" class="nav-link">
@@ -44,6 +51,8 @@
                     </p>
                 </a>
             </li>
+            @endcan
+            @can('clients view')
             <li class="nav-item">
 
                 <a href="{{ route('clients.index') }}" class="nav-link">
@@ -52,6 +61,8 @@
                     </p>
                 </a>
             </li>
+            @endcan
+            @can('contacts view')
             <li class="nav-item">
                 <a href="{{ route('contacts.index') }}" class="nav-link">
                     <p>
@@ -59,6 +70,8 @@
                     </p>
                 </a>
             </li>
+            @endcan
+            @can('donationRequests view')
             <li class="nav-item">
                 <a href="{{ route('donation-requests.index') }}" class="nav-link">
                     <p>
@@ -66,6 +79,8 @@
                     </p>
                 </a>
             </li>
+            @endcan
+            @can('users view')
             <li class="nav-item">
                 <a href="{{ route('users.index') }}" class="nav-link">
                     <p>
@@ -73,6 +88,8 @@
                     </p>
                 </a>
             </li>
+            @endcan
+            @can('roles view')
             <li class="nav-item">
                 <a href="{{ route('roles.index') }}" class="nav-link">
                     <p>
@@ -80,6 +97,8 @@
                     </p>
                 </a>
             </li>
+            @endcan
+            @can('settings view')
             <li class="nav-item">
                 <a href="{{ route('settings.index') }}" class="nav-link">
                     <p>
@@ -87,6 +106,7 @@
                     </p>
                 </a>
             </li>
+            @endcan
             <li class="nav-item">
                 <a href="{{ route('change-password') }}" class="nav-link">
                     <p>
@@ -94,7 +114,6 @@
                     </p>
                 </a>
             </li>
-
           <form action="{{ route('logout') }}" method="post">
               @csrf
               <li class="nav-item">

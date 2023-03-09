@@ -60,6 +60,7 @@
                                             <td>{{ $donation->patient_age }}</td>
                                             <td>{{ $donation->blood_type_id }}</td>
                                             <td>{{ $donation->bags_num }}</td>
+                                            @can('donationRequests delete')
                                             <td>
                                                 <form action="{{ route('donation-requests.destroy',$donation->id) }}" method="post">
                                                     @csrf
@@ -67,6 +68,7 @@
                                                     <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
                                                 </form>
                                             </td>
+                                            @endcan
                                         </tr>
                                     @endforeach
 

@@ -64,6 +64,7 @@
                                             <td>{{ $contact->title }}</td>
                                             <td>{{ $contact->content }}</td>
                                             <td>{{ ($contact->is_done == 0) ? 'No' : 'yes' }}</td>
+                                            @can('contact delete')
                                             <td>
                                                 <form action="{{ route('contacts.destroy',$contact->id) }}" method="post">
                                                     @csrf
@@ -71,6 +72,7 @@
                                                     <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
                                                 </form>
                                             </td>
+                                            @endcan
                                         </tr>
                                     @endforeach
 

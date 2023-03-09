@@ -36,7 +36,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::group([
     'prefix' => 'dashboard',
-    'middleware' => 'auth',
+    'middleware' => ['auth','auto-check-permission'],
 
 ],function(){
     Route::get('/',[DashboardController::class,'index'])->name('dashboard.index');

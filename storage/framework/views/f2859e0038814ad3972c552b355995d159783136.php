@@ -1,31 +1,30 @@
-@extends('layouts.dashboard')
-@section('title','All Categories')
-@section('content')
+<?php $__env->startSection('title','All Categories'); ?>
+<?php $__env->startSection('content'); ?>
     <div class="container">
-        @can('categories create')
         <div class="row">
             <div class="card-header">
-                <button type="button" class="btn btn-info"><a class="text-dark" href="{{ route('categories.create') }}">Create</a></button>
+                <button type="button" class="btn btn-info"><a class="text-dark" href="<?php echo e(route('categories.create')); ?>">Create</a></button>
             </div>
         </div>
-        @endcan
     </div>
 
     <div class="content">
         <div class="container-fluid">
 
-            @if(session()->has('success'))
+            <?php if(session()->has('success')): ?>
                 <div class="alert alert-success">
-                    {{ session('success') }}
+                    <?php echo e(session('success')); ?>
+
                 </div>
-            @endif
+            <?php endif; ?>
 
 
-            @if(session()->has('info'))
+            <?php if(session()->has('info')): ?>
                 <div class="alert alert-info">
-                    {{ session('info') }}
+                    <?php echo e(session('info')); ?>
+
                 </div>
-            @endif
+            <?php endif; ?>
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12">
@@ -44,26 +43,22 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($categories as $category)
+                                    <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td><a href="{{ route('categories.show',$category->id) }}">{{$category->name}}</a></td>
-                                            @can('categories edit')
+                                            <td><?php echo e($loop->iteration); ?></td>
+                                            <td><a href="<?php echo e(route('categories.show',$category->id)); ?>"><?php echo e($category->name); ?></a></td>
                                             <td>
-                                                <button type="button" class="btn btn-outline-success btn-sm"><a class="text-success" href="{{ route('categories.edit',$category->id) }}">Edit</a></button>
+                                                <button type="button" class="btn btn-outline-success btn-sm"><a class="text-success" href="<?php echo e(route('categories.edit',$category->id)); ?>">Edit</a></button>
                                             </td>
-                                            @endcan
-                                            @can('categories delete')
                                             <td>
-                                                <form action="{{ route('categories.destroy',$category) }}" method="post">
-                                                    @csrf
-                                                    @method('Delete')
+                                                <form action="<?php echo e(route('categories.destroy',$category)); ?>" method="post">
+                                                    <?php echo csrf_field(); ?>
+                                                    <?php echo method_field('Delete'); ?>
                                                     <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
                                                 </form>
                                             </td>
-                                             @endcan
                                         </tr>
-                                    @endforeach
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                                     </tbody>
                                 </table>
@@ -72,11 +67,14 @@
                             <!-- /.card-body -->
                         </div>
                     </div>
-                    {{ $categories->withQueryString()->links() }}
+                    <?php echo e($categories->withQueryString()->links()); ?>
+
                 </div>
             </div>
             <!-- /.card -->
         </div>
     </div>
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.dashboard', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\bloodbank\resources\views/dashboard/categories/index.blade.php ENDPATH**/ ?>

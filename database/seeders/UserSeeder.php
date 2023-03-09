@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
             'name' => 'Nada Raafat',
             'email' => 'nada@admin.com',
             'email_verified_at' => now(),
-            'password' => Hash::make('123456789'),
+            'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
             'role' => 'super admin',
         ]);

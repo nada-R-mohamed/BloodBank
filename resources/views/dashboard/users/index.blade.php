@@ -2,11 +2,13 @@
 @section('title','All Users')
 @section('content')
     <div class="container">
+        @can('users create')
         <div class="row">
             <div class="card-header">
                 <button type="button" class="btn btn-info"><a class="text-dark" href="{{ route('users.create') }}">Create</a></button>
             </div>
         </div>
+        @endcan
     </div>
 
     <div class="content">
@@ -48,9 +50,12 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td><a href="{{ route('users.show',$user->id) }}">{{$user->name}}</a></td>
                                             <td>{{ $user->role }}</td>
+                                            @can('users edit')
                                             <td>
                                                 <button type="button" class="btn btn-outline-success btn-sm"><a class="text-success" href="{{ route('users.edit',$user->id) }}">Edit</a></button>
                                             </td>
+                                            @endcan
+                                            @can('users delete')
                                             <td>
                                                 <form action="{{ route('users.destroy',$user) }}" method="post">
                                                     @csrf
@@ -58,6 +63,7 @@
                                                     <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
                                                 </form>
                                             </td>
+                                            @endcan
                                         </tr>
                                     @endforeach
 

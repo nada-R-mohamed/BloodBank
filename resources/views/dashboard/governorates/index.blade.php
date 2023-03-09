@@ -2,11 +2,13 @@
 @section('title','All Governorates')
 @section('content')
     <div class="container">
+        @can('governorates create')
         <div class="row">
             <div class="card-header">
                 <button type="button" class="btn btn-info"><a class="text-dark" href="{{ route('governorates.create') }}">Create</a></button>
             </div>
         </div>
+        @endcan
     </div>
 
     <div class="content">
@@ -46,9 +48,12 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td><a href="{{ route('governorates.show',$governorate->id) }}">{{$governorate->name}}</a></td>
+                                        @can('governorates edit')
                                         <td>
                                             <button type="button" class="btn btn-outline-success btn-sm"><a class="text-success" href="{{ route('governorates.edit',$governorate->id) }}">Edit</a></button>
                                         </td>
+                                        @endcan
+                                        @can('governorates delete')
                                         <td>
                                             <form action="{{ route('governorates.destroy',$governorate) }}" method="post">
                                                 @csrf
@@ -56,6 +61,7 @@
                                                 <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
                                             </form>
                                         </td>
+                                        @endcan
                                     </tr>
                                 @endforeach
 

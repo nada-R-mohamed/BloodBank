@@ -64,6 +64,7 @@
                                             <td>{{ $client->blood_type_id }}</td>
                                             <td>{{ $client->last_donation_date }}</td>
                                             <td>{{ $client->city_id }}</td>
+                                            @can('clients status')
                                             <td>
                                                 <a href="{{url(route('clients.status',$client->id))}}">
                                                     @if($client->status=="active")
@@ -73,6 +74,8 @@
                                                     @endif
                                                 </a>
                                             </td>
+                                            @endcan
+                                            @can('clients delete')
                                             <td>
                                                 <form action="{{ route('clients.destroy',$client->id) }}" method="post">
                                                     @csrf
@@ -80,6 +83,7 @@
                                                     <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
                                                 </form>
                                             </td>
+                                            @endcan
                                         </tr>
                                     @endforeach
 

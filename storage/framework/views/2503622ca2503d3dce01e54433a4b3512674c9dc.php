@@ -1,36 +1,35 @@
-@extends('layouts.dashboard')
-@section('title','All Cities')
-@section('breadcrumb')
-    @parent
+<?php $__env->startSection('title','All Cities'); ?>
+<?php $__env->startSection('breadcrumb'); ?>
+    <?php echo \Illuminate\View\Factory::parentPlaceholder('breadcrumb'); ?>
     <li class="breadcrumb-item active">All Cities</li>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
     <div class="container">
-        @can('cities create')
         <div class="row">
             <div class="card-header">
-                <button type="button" class="btn btn-info"><a class="text-dark" href="{{ route('cities.create') }}">Create</a></button>
+                <button type="button" class="btn btn-info"><a class="text-dark" href="<?php echo e(route('cities.create')); ?>">Create</a></button>
             </div>
         </div>
-        @endcan
     </div>
 
     <div class="content">
         <div class="container-fluid">
 
-            @if(session()->has('success'))
+            <?php if(session()->has('success')): ?>
                 <div class="alert alert-success">
-                    {{ session('success') }}
+                    <?php echo e(session('success')); ?>
+
                 </div>
-            @endif
+            <?php endif; ?>
 
 
-            @if(session()->has('info'))
+            <?php if(session()->has('info')): ?>
                 <div class="alert alert-info">
-                    {{ session('info') }}
+                    <?php echo e(session('info')); ?>
+
                 </div>
-            @endif
+            <?php endif; ?>
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12">
@@ -49,26 +48,22 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($cities as $city)
+                                    <?php $__currentLoopData = $cities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $city): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td><a href="{{ route('cities.show',$city->id) }}">{{$city->name}}</a></td>
-                                            @can('cities edit')
+                                            <td><?php echo e($loop->iteration); ?></td>
+                                            <td><a href="<?php echo e(route('cities.show',$city->id)); ?>"><?php echo e($city->name); ?></a></td>
                                             <td>
-                                                <button type="button" class="btn btn-outline-success btn-sm"><a class="text-success" href="{{ route('cities.edit',$city->id) }}">Edit</a></button>
+                                                <button type="button" class="btn btn-outline-success btn-sm"><a class="text-success" href="<?php echo e(route('cities.edit',$city->id)); ?>">Edit</a></button>
                                             </td>
-                                            @endcan
-                                            @can('cities delete')
                                             <td>
-                                                <form action="{{ route('cities.destroy',$city->id) }}" method="post">
-                                                    @csrf
-                                                    @method('Delete')
+                                                <form action="<?php echo e(route('cities.destroy',$city->id)); ?>" method="post">
+                                                    <?php echo csrf_field(); ?>
+                                                    <?php echo method_field('Delete'); ?>
                                                     <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
                                                 </form>
                                             </td>
-                                            @endcan
                                         </tr>
-                                    @endforeach
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </tbody>
                                 </table>
 
@@ -76,11 +71,14 @@
                             <!-- /.card-body -->
                         </div>
                     </div>
-                    {{ $cities->withQueryString()->links() }}
+                    <?php echo e($cities->withQueryString()->links()); ?>
+
                 </div>
             </div>
             <!-- /.card -->
         </div>
     </div>
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.dashboard', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\bloodbank\resources\views/dashboard/cities/index.blade.php ENDPATH**/ ?>

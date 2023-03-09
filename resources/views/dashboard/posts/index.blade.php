@@ -7,11 +7,13 @@
 
 @section('content')
     <div class="container">
+        @can('posts create')
         <div class="row">
             <div class="card-header">
                 <button type="button" class="btn btn-info"><a class="text-dark" href="{{ route('posts.create') }}">Create</a></button>
             </div>
         </div>
+        @endcan
     </div>
 
     <div class="content">
@@ -66,9 +68,12 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td><a href="{{ route('posts.show',$post->id) }}">{{$post->title}}</a></td>
+                                            @can('posts edit')
                                             <td>
                                                 <button type="button" class="btn btn-outline-success btn-sm"><a class="text-success" href="{{ route('posts.edit',$post->id) }}">Edit</a></button>
                                             </td>
+                                            @endcan
+                                            @can('posts delete')
                                             <td>
                                                 <form action="{{ route('posts.destroy',$post->id) }}" method="post">
                                                     @csrf
@@ -76,6 +81,7 @@
                                                     <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
                                                 </form>
                                             </td>
+                                            @endcan
                                         </tr>
                                     @endforeach
 
