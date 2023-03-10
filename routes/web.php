@@ -46,6 +46,7 @@ Route::group([
     Route::resource('posts',PostController::class);
     Route::resource('clients',ClientController::class)->only('index','destroy','edit');
     Route::get('clients/{id}/change-status',[ClientController::class,'changeStatus'])->name('clients.status');
+    Route::get('contacts/{id}/change-status',[CommunicationRequestController::class,'changeStatus'])->name('contacts.status');
     Route::resource('contacts',CommunicationRequestController::class)->only('index','destroy');
     Route::resource('donation-requests', DonationRequestController::class)->only('index','destroy','show');
     Route::put('settings/{setting}',[SettingController::class, 'update'])->name('settings.update');

@@ -63,7 +63,16 @@
                                             <td>{{ $contact->client->phone }}</td>
                                             <td>{{ $contact->title }}</td>
                                             <td>{{ $contact->content }}</td>
-                                            <td>{{ ($contact->is_done == 0) ? 'No' : 'yes' }}</td>
+                                            {{--                                            <td>{{ ($contact->is_done == 0) ? 'No' : 'yes' }}</td>--}}
+                                            <td>
+                                                <a href="{{url(route('contacts.status',$contact->id))}}">
+                                                    @if($contact->is_done == 0)
+                                                        No
+                                                    @else
+                                                        Yes
+                                                    @endif
+                                                </a>
+                                            </td>
                                             @can('contacts delete')
                                                 <td>
                                                     <form action="{{ route('contacts.destroy',$contact->id) }}"

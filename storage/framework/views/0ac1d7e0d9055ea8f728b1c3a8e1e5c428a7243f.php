@@ -64,7 +64,16 @@
                                             <td><?php echo e($contact->client->phone); ?></td>
                                             <td><?php echo e($contact->title); ?></td>
                                             <td><?php echo e($contact->content); ?></td>
-                                            <td><?php echo e(($contact->is_done == 0) ? 'No' : 'yes'); ?></td>
+                                            
+                                            <td>
+                                                <a href="<?php echo e(url(route('contacts.status',$contact->id))); ?>">
+                                                    <?php if($contact->is_done == 0): ?>
+                                                        No
+                                                    <?php else: ?>
+                                                        Yes
+                                                    <?php endif; ?>
+                                                </a>
+                                            </td>
                                             <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('contacts delete')): ?>
                                                 <td>
                                                     <form action="<?php echo e(route('contacts.destroy',$contact->id)); ?>"

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Client;
 use App\Models\CommunicationRequest;
 use Illuminate\Http\Request;
 
@@ -24,7 +25,7 @@ class CommunicationRequestController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
      */
     public function destroy($id)
     {
@@ -33,5 +34,17 @@ class CommunicationRequestController extends Controller
         $contact->delete();
         return redirect()->route('contacts.index')
             ->with('success', 'The communication request was deleted successfully.');
+    }
+    public function changeStatus(Request $request, $id)
+    {
+        //find communication request by id
+        $contact = CommunicationRequest::findOrFail($id);
+        if($contact->is_done == 1) {
+            $contact->is_done = 0;
+        }else{
+            $contact->is_done = 1;
+        }
+        $contact->save();
+        return redirect()->route('contacts.index')->with('success', 'contact Updated status Successfully');
     }
 }
