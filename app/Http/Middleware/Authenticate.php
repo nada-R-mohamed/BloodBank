@@ -22,10 +22,10 @@ class Authenticate extends Middleware
             return route('login');
         }
     }
-    protected function unauthenticated($request, array $guards)
-    {
-        if(! Auth::guard('sanctum')->check()) {
-            abort(response()->json(['error' => 'Unauthenticated.'], 401));
-        }
-    }
+//    protected function unauthenticated($request, array $guards)
+//    {
+//        if(! Auth::guard('sanctum')->check()) {
+//            abort($this->responseError(['error' => 'Unauthenticated.'], statusCode: 401));
+//        }
+//    }
 }

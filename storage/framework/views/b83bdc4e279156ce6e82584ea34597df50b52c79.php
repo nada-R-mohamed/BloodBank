@@ -30,7 +30,7 @@
                         <div class="form-group row">
                             <label for="content" class="col-sm-2 col-form-label">Content</label>
                             <div class="col-sm-10">
-                               <?php echo e($post->content); ?>
+                                <?php echo e($post->content); ?>
 
                             </div>
                         </div>

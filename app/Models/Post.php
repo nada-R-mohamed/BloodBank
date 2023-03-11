@@ -43,4 +43,8 @@ class Post extends Model
             'image' => "$required|image|mimes:jpeg,png,jpg,gif,svg",
         ];
     }
+//    public function getImageAttribute($image)
+//    {
+//        return asset("storage/" . $image);
+//    }
 }

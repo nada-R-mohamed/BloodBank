@@ -52,6 +52,7 @@ class DonationRequest extends Model
                 $query->orWhere('patient_age', 'like', '%'. $request->search. '%');
                 $query->orWhere('blood_type_id', 'like', '%'. $request->search. '%');
                 $query->orWhere('bags_num', 'like', '%'. $request->search. '%');
+                $query->orWhere('city_id', 'like', '%'. $request->search. '%');
             });
         }
     }
