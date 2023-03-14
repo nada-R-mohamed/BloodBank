@@ -1,5 +1,5 @@
 //articles-carousel
-$(document).ready(function() {
+$(document).ready(function () {
     $('.articles-carousel').owlCarousel({
         loop: false,
         margin: 10,
@@ -23,7 +23,7 @@ $(document).ready(function() {
     })
 });
 
-$("#governorates").change(function() {
+$("#governorates").change(function () {
     var governorateId = $("#governorates").val();
     console.log("selected gov:" + governorateId);
     $("#cities").empty();
@@ -33,19 +33,18 @@ $("#governorates").change(function() {
         url: 'https://cors-anywhere.herokuapp.com/https://ipda3-tech.com/blood-bank/api/v1/cities?governorate_id=' + governorateId,
         type: 'get',
         data: {},
-        success: function(result) {
+        success: function (result) {
             console.log("success");
 
 
-
-            $.each(result.data, function(index, city) {
+            $.each(result.data, function (index, city) {
                 console.log(city);
                 var option = '<option value="' + city.id + '">' + city.name + '</option>';
                 $("#cities").append(option);
             });
         },
 
-        error: function() {
+        error: function () {
             console.log("error");
         }
     });

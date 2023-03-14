@@ -1,4 +1,4 @@
-@extends('layouts.front-master')
+@extends('layouts.front-master',['bodyClass' => 'inside-request'])
 @section('content')
     <!--ask-donation-->
     <div class="ask-donation">
@@ -6,9 +6,9 @@
             <div class="path">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index-ltr.html">Home</a></li>
-                        <li class="breadcrumb-item"><a href="donation-requests-ltr.html">Donation requsets</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Donation requset: Ahmed Mohamed</li>
+                        <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('donations.index') }}">Donation requsets</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Donation requset:{{ $donation->patient_name }}</li>
                     </ol>
                 </nav>
             </div>
@@ -19,7 +19,7 @@
                             <div class="inside">
                                 <div class="info">
                                     <div class="dark">
-                                        <p>Name</p>
+                                        <p>{{ $donation->patient_name }}</p>
                                     </div>
                                     <div class="light">
                                         <p>Ahmed Mohamed</p>

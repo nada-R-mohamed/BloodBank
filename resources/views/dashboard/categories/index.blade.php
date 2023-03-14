@@ -10,11 +10,6 @@
                     </button>
                 </div>
             </div>
-        @endcan
-    </div>
-
-    <div class="content">
-        <div class="container-fluid">
 
             @if(session()->has('success'))
                 <div class="alert alert-success">
@@ -28,6 +23,11 @@
                     {{ session('info') }}
                 </div>
             @endif
+        @endcan
+    </div>
+
+    <div class="content">
+        <div class="container-fluid">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12">

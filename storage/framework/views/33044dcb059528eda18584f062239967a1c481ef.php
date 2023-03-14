@@ -71,4 +71,4 @@
 
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.front-master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\bloodbank\resources\views/front/posts/article-details.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.front-master',['bodyClass' => 'article-details'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\bloodbank\resources\views/front/posts/article-details.blade.php ENDPATH**/ ?>

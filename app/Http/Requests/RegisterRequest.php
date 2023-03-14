@@ -29,7 +29,7 @@ class RegisterRequest extends FormRequest
             'date_of_birth' => 'required|date',
             'blood_type_id' => 'required|integer|exists:blood_types,id',
             'phone' => ['regex:/^01[0125][0-9]{8}$/'],
-            'password' => 'required|min:6',
+            'password' => 'required|min:6|confirmed',
             'last_donation_date' => 'required|date',
             'city_id' => 'required|integer|exists:cities,id',
             'device_name' => 'required|string'

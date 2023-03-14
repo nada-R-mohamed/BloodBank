@@ -16,7 +16,7 @@
                                 There is a proven fact from a long time ago that the readable content of a page will not
                                 distract the reader from focusing on the.
                             </p>
-                            <a href="#">more</a>
+                            <a href="<?php echo e(route('about-us')); ?>">more</a>
                         </div>
                     </div>
                 </div>
@@ -53,8 +53,10 @@
         <div class="container">
             <div class="col-lg-6 text-center">
                 <p>
-                    <span>Blood Bank</span><?php echo e($settings->about_app); ?>
-
+                    <span>Blood Bank</span> There is a proven fact from a long time ago that the readable content of a
+                    page
+                    will not distract the reader from focusing on the external appearance of the text or the form of the
+                    paragraphs placed on the page he reads.
                 </p>
             </div>
         </div>

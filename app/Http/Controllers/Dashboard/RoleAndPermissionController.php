@@ -40,8 +40,8 @@ class RoleAndPermissionController extends Controller
         //validation
         $request->validate([
             'name' => 'required|string|max:255|unique:roles,name',
-            'permissions' => ['required','array'],['exists:permissions,name'],
-
+            'permissions' => ['required','array'],
+            'permissions.*' => ['exists:permissions,name']
 
         ]);
         // store in role model
@@ -66,7 +66,9 @@ class RoleAndPermissionController extends Controller
         try{
             $role = Role::findOrFail($id);
             $permissions = $role->permissions;
+
         }catch (\Exception $e){
+
             return redirect()->route('roles.index')
                 ->with('info','Role not found');
         }
@@ -105,7 +107,6 @@ class RoleAndPermissionController extends Controller
         $request->validate([
             'name' => "required|string|max:255|unique:roles,name,$id",
             'permissions' => ['array'],['exists:permissions,name'],
-
         ]);
         // find role
         $role = Role::findOrFail($id);

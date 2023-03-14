@@ -15,4 +15,13 @@ class FrontController extends Controller
         $donationRequests = DonationRequest::take(5)->with('bloodType','city')->get();
         return view('front.home',compact('posts' , 'donationRequests'));
     }
+    public function aboutUs()
+    {
+        return view('front.who-us');
+    }
+
+    public function contactUs()
+    {
+        return view('front.contact-us');
+    }
 }

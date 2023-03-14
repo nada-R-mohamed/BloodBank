@@ -1,4 +1,5 @@
-<!doctype html>
+<?php use Illuminate\Routing\Route; ?>
+    <!doctype html>
 <html lang="en">
 <head>
     <!-- Required meta tags -->
@@ -14,7 +15,7 @@
 
     <!--font awesome css-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
-    <link rel="icon" href="<?php echo e(asset('website/imgs/Icon.png')); ?>">
+    <link rel="icon" href="<?php echo e(url(asset('website/imgs/Icon.png'))); ?>">
 
     <!--owl-carousel css-->
     <link rel="stylesheet" href="<?php echo e(asset('website/assets/css/owl.carousel.min.css')); ?>">
@@ -28,7 +29,7 @@
 
     <title>Blood Bank</title>
 </head>
-<body>
+<body class="<?php echo e($bodyClass ?? ""); ?>">
 <!--upper-bar-->
 <div class="upper-bar">
     <div class="container">
@@ -52,60 +53,65 @@
 
             <!-- not a member-->
             <div class="col-lg-4">
-                <div class="info" dir="ltr">
-                    <div class="phone">
-                        <i class="fas fa-phone-alt"></i>
-                        <p>+<?php echo e($settings->phone); ?></p>
-                    </div>
-                    <div class="e-mail">
-                        <i class="far fa-envelope"></i>
-                        <p><?php echo e($settings->email); ?></p>
-                    </div>
-                </div>
-
-                <!--I'm a member
-
-                <div class="member">
-                    <p class="welcome">مرحباً بك</p>
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            احمد محمد
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="index-1.html">
-                                <i class="fas fa-home"></i>
-                                الرئيسية
-                            </a>
-                            <a class="dropdown-item" href="#">
-                                <i class="far fa-user"></i>
-                                معلوماتى
-                            </a>
-                            <a class="dropdown-item" href="#">
-                                <i class="far fa-bell"></i>
-                                اعدادات الاشعارات
-                            </a>
-                            <a class="dropdown-item" href="#">
-                                <i class="far fa-heart"></i>
-                                المفضلة
-                            </a>
-                            <a class="dropdown-item" href="#">
-                                <i class="far fa-comments"></i>
-                                ابلاغ
-                            </a>
-                            <a class="dropdown-item" href="contact-us.html">
-                                <i class="fas fa-phone-alt"></i>
-                                تواصل معنا
-                            </a>
-                            <a class="dropdown-item" href="index.html">
-                                <i class="fas fa-sign-out-alt"></i>
-                                تسجيل الخروج
-                            </a>
+                <?php if(auth()->guard()->guest()): ?>
+                    <div class="info" dir="ltr">
+                        <div class="phone">
+                            <i class="fas fa-phone-alt"></i>
+                            <p>+<?php echo e($settings->phone); ?></p>
+                        </div>
+                        <div class="e-mail">
+                            <i class="far fa-envelope"></i>
+                            <p><?php echo e($settings->email); ?></p>
                         </div>
                     </div>
-                </div>
+                <?php endif; ?>
 
-                -->
+                <!--I'm a member -->
+                <?php if(auth()->guard('client')->check()): ?>
+
+                    <div class="member">
+                        <p class="welcome">مرحباً بك</p>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                احمد محمد
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="index-1.html">
+                                    <i class="fas fa-home"></i>
+                                    الرئيسية
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="far fa-user"></i>
+                                    معلوماتى
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="far fa-bell"></i>
+                                    اعدادات الاشعارات
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="far fa-heart"></i>
+                                    المفضلة
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="far fa-comments"></i>
+                                    ابلاغ
+                                </a>
+                                <a class="dropdown-item" href="contact-us.html">
+                                    <i class="fas fa-phone-alt"></i>
+                                    تواصل معنا
+                                </a>
+                                <a class="dropdown-item" href="index.html">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                    تسجيل الخروج
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                <?php endif; ?>
+
 
             </div>
         </div>
@@ -126,40 +132,40 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item active">
+                    <li class="nav-item  <?php echo e((request()->is('front/home')) ? 'active' : ''); ?>">
                         <a class="nav-link" href="<?php echo e(route('home')); ?>">home <span class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">about us</a>
+                    <li class="nav-item <?php echo e((request()->is('front/about-us')) ? 'active' : ''); ?> ">
+                        <a class="nav-link" href="<?php echo e(route('about-us')); ?>">about us</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item <?php echo e((request()->is('front/pos')) ? 'active' : ''); ?>">
                         <a class="nav-link" href="<?php echo e(route('posts.index')); ?>">articles</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="donation-requests-ltr.html">donation requests</a>
+                        <a class="nav-link" href="<?php echo e(route('donations.index')); ?>">donation requests</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="who-are-us-ltr.html">who are us</a>
+                        <a class="nav-link" href="<?php echo e(route('about-us')); ?>">who are us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="contact-us-ltr.html">contact us</a>
+                        <a class="nav-link" href="<?php echo e(route('contact-us')); ?>">contact us</a>
                     </li>
                 </ul>
 
                 <!--not a member-->
+                <?php if(auth()->guard()->guest()): ?>
                 <div class="accounts">
-                    <a href="signin-account-rtl.html" class="signin">sign in</a>
-                    <a href="create-account-ltr.html" class="create">create new account</a>
+                    <a href="<?php echo e(route('front.login')); ?>" class="signin">sign in</a>
+                    <a href="<?php echo e(route('register.create')); ?>" class="create">create new account</a>
                 </div>
-
-                <!--I'm a member
-
+                <?php endif; ?>
+                <!--I'm a member-->
+                <?php if(auth()->guard('client')->check()): ?>
                 <a href="#" class="donate">
-                    <img src="imgs/transfusion.svg">
+                    <img src="<?php echo e(asset('website/imgs/transfusion.svg')); ?>">
                     <p>طلب تبرع</p>
                 </a>
-
-                -->
+                <?php endif; ?>
 
             </div>
         </div>
@@ -167,6 +173,7 @@
 </div>
 
 <?php echo $__env->yieldContent('content'); ?>
+
 <!--footer-->
 <div class="footer">
     <div class="inside-footer">
@@ -184,9 +191,11 @@
                     <div class="list-group" id="list-tab" role="tablist">
                         <a class="list-group-item list-group-item-action active" id="list-home-list"
                            href="<?php echo e(route('home')); ?>" role="tab" aria-controls="home">Home</a>
-                        <a class="list-group-item list-group-item-action" id="list-profile-list" href="#" role="tab"
+                        <a class="list-group-item list-group-item-action" id="list-profile-list"
+                           href="<?php echo e(route('about-us')); ?>" role="tab"
                            aria-controls="profile">About us</a>
-                        <a class="list-group-item list-group-item-action" id="list-messages-list" href="<?php echo e(route('posts.index')); ?>" role="tab"
+                        <a class="list-group-item list-group-item-action" id="list-messages-list"
+                           href="<?php echo e(route('posts.index')); ?>" role="tab"
                            aria-controls="messages">Articles</a>
                         <a class="list-group-item list-group-item-action" id="list-settings-list"
                            href="donation-requests-ltr.html" role="tab" aria-controls="settings">Donation requests</a>
@@ -249,6 +258,8 @@
 <script src="<?php echo e(asset('website/assets/js/owl.carousel.min.js')); ?>"></script>
 
 <script src="<?php echo e(asset('website/assets/js/main-ltr.js')); ?>"></script>
+<?php echo $__env->yieldPushContent('scripts'); ?>
 </body>
 </html>
+
 <?php /**PATH C:\xampp\htdocs\bloodbank\resources\views/layouts/front-master.blade.php ENDPATH**/ ?>

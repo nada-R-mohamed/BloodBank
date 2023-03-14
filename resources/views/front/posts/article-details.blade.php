@@ -1,4 +1,4 @@
-@extends('layouts.front-master')
+@extends('layouts.front-master',['bodyClass' => 'article-details'])
 @section('content')
     <!--inside-article-->
     <div class="inside-article">
